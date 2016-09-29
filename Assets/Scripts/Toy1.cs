@@ -9,6 +9,7 @@ public class Toy1 : MonoBehaviour {
 
 	public DogTreats player;
 	public UnityEngine.UI.Text disp;
+
 	bool received = false;
 	bool didTap = false;
 	
@@ -22,6 +23,7 @@ public class Toy1 : MonoBehaviour {
 		}
 		if (didTap == true) {
 			//random chance to receive toy
+
 		}
 	}
 
