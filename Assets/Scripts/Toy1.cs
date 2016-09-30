@@ -32,16 +32,14 @@ public class Toy1 : MonoBehaviour {
 	void FixedUpdate(){
 		if (didTap && !received) {
 			//random chance to receive toy
-			int num = Random.Range(0,100);
+			int num = Random.Range(0,500);
 			int receiveNumber = 69;
-			Debug.Log (num);
+			//Debug.Log (num);
 			if (num == receiveNumber) {
 				Debug.Log (taps);
 				received = true;
+				player.treatsMultiplier = treatIncreaseFromToy;
 			}
-		}
-		if (didTap && received) {
-			player.totalTreats += Mathf.Round ((player.treatsPerTap * treatIncreaseFromToy) - player.treatsPerTap);
 		}
 		didTap = false;
 	}

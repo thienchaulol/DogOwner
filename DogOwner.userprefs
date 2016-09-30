@@ -2,10 +2,22 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Toy1.cs">
     <Files>
-      <File FileName="Assets\Scripts\DogTreats.cs" Line="19" Column="25" />
-      <File FileName="Assets\Scripts\Dog1.cs" Line="31" Column="75" />
-      <File FileName="Assets\Scripts\Toy1.cs" Line="20" Column="88" />
+      <File FileName="Assets\Scripts\Dog1.cs" Line="19" Column="2" />
+      <File FileName="Assets\Scripts\Toy1.cs" Line="41" Column="5" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="DogOwner" expanded="True">
+            <Node name="Assembly-CSharp" expanded="True">
+              <Node name="Scripts" expanded="True">
+                <Node name="Toy1.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
