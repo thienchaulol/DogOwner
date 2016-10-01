@@ -1,10 +1,11 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Toy1.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\DogTreats.cs">
     <Files>
-      <File FileName="Assets\Scripts\Toy1.cs" Line="49" Column="13" />
-      <File FileName="Assets\Scripts\DogTreats.cs" Line="26" Column="2" />
-      <File FileName="Assets\Scripts\DogTreatsMultiplier.cs" Line="21" Column="2" />
+      <File FileName="Assets\Scripts\Toy1.cs" Line="33" Column="1" />
+      <File FileName="Assets\Scripts\DogTreats.cs" Line="14" Column="1" />
+      <File FileName="Assets\Scripts\DogTreatsMultiplier.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\FadeInOut.cs" Line="5" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
