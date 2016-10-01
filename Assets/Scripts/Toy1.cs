@@ -5,7 +5,7 @@ public class Toy1 : MonoBehaviour {
 
 	public string toyName = "Squeeky Ball";
 	public float toyChance = 0.01f;
-	public float treatMultFactor = 2f;
+	public float treatMultFactor;
 	public int maxRange;
 	public int receiveNumber;
 
@@ -17,7 +17,6 @@ public class Toy1 : MonoBehaviour {
 	public bool show = false;
 	bool didTap = false;
 	int taps = 0;
-	int tapsToDiscover = 0;
 
 	public bool testReceive = false;
 	int rndNum;
@@ -25,9 +24,9 @@ public class Toy1 : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (!received) {
+		if (numOfUpgrades == 0) {
 			disp.text = "Toy: " + toyName + "\n" + "Receive chance every tap: " + toyChance * 100f + "%";
-		} else if (received && numOfUpgrades >= 1){
+		} else if (numOfUpgrades > 0){
 			disp.text = "Toy: " + toyName + "\tLevel: " + numOfUpgrades + "\n" + "Receive chance every tap: " + toyChance * 100f + "%"
 				+ "\n" + "Increases all treat tap/accumulation by: " + treatMultFactor * 100f + "%" + "\n";
 		}
@@ -39,34 +38,23 @@ public class Toy1 : MonoBehaviour {
 
 	void FixedUpdate(){
 		rndNum = Random.Range(0,maxRange);
-		if (didTap && !received) {
-			//random chance to receive toy
-			//Debug.Log (num);
+		if (didTap) {
 			if (rndNum == receiveNumber) {
-				Debug.Log (taps);
-				received = true;
-				tapsToDiscover = taps;
-				show = true;
-				StartCoroutine (toyNotifFunc());
-				show = false;
-				player.treatsMultiplier *= treatMultFactor;	//each time(after the first time) you discover a toy, the multiplier is incremented by 2%
-				maxRange *= 2;	//each time you discover a toy, the chances of discovering another one is 2x more difficult
-				toyChance /= 2f;
-				numOfUpgrades += 1f;
-				tapsToDiscover = 0;
-				taps = 0;
-			}
-		}
-		else if (didTap && received && numOfUpgrades >= 1 && show == false) {
-			if (rndNum == receiveNumber) {
-				show = true;
-				StartCoroutine (toyNextNotifFunc());
-				show = false;
-				numOfUpgrades += 1f;
-				player.treatsMultiplier += .2f; //each time(after the first time) you discover a toy, the multiplier is incremented by 20%
+				if (numOfUpgrades > 0) {
+					show = true;
+					StartCoroutine (toyNextNotifFunc());
+					show = false;
+					player.treatsMultiplier += .2f;
+					treatMultFactor += .2f;
+				} else {
+					show = true;
+					StartCoroutine (toyNotifFunc());
+					show = false;
+					player.treatsMultiplier *= treatMultFactor;
+				}
 				maxRange *= 2;
 				toyChance /= 2f;
-				tapsToDiscover = 0;
+				numOfUpgrades += 1f;
 				taps = 0;
 			}
 		}
@@ -78,7 +66,7 @@ public class Toy1 : MonoBehaviour {
 	IEnumerator toyNotifFunc() {
 		//Debug.Log("Before Waiting 2 seconds");
 		if(show)
-		toyNotif.text = "You've discovered a: " + toyName + " in " + tapsToDiscover + " taps.";
+		toyNotif.text = "You've discovered a: " + toyName + " in " + taps + " taps.";
 		yield return new WaitForSeconds(10);
 		toyNotif.text = "";
 		//Debug.Log("After Waiting 2 Seconds");
@@ -86,7 +74,7 @@ public class Toy1 : MonoBehaviour {
 
 	IEnumerator toyNextNotifFunc(){
 		if(show)
-			toyNotif.text = "You've discovered another: " + toyName + " in " + tapsToDiscover + " taps.";
+			toyNotif.text = "You've discovered another: " + toyName + " in " + taps+ " taps.";
 		yield return new WaitForSeconds(10);
 		toyNotif.text = "";
 	}
