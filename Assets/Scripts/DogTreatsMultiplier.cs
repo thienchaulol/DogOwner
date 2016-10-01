@@ -20,6 +20,7 @@ public class DogTreatsMultiplier : MonoBehaviour {
 	}
 
 	public void Tapped(){
+		//if(Input.GetMouseButtonDown(0))
 		if (player.totalTreats >= costToUpgrade) {
 			numberOfUpgrades += 1f;
 			player.totalTreats -= costToUpgrade;

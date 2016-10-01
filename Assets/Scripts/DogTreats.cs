@@ -21,16 +21,16 @@ public class DogTreats : MonoBehaviour {
 			didTap = true;
 		}
 		disp.text = "Dog Treats: " + Mathf.Round(totalTreats) + "\n" + "Dog Treats per Tap: " + treatsPerTap 
-			+ "\n" + "Treats per second: " + playerTreatsPerSec;
+			+ "\n" + "Treats per second: " + Mathf.Round(playerTreatsPerSec);
 	}
 
 	void treatIncreaseSec(){
-		totalTreats += playerTreatsPerSec * treatsMultiplier;
+		totalTreats += Mathf.Round(playerTreatsPerSec * treatsMultiplier);
 	}
 
 	void FixedUpdate(){
 		if (didTap == true) {
-			totalTreats += treatsPerTap * treatsMultiplier;
+			totalTreats += Mathf.Round(treatsPerTap * treatsMultiplier);
 			didTap = false;
 		}
 	}
