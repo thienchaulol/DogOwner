@@ -12,8 +12,6 @@ public class DogTreats : MonoBehaviour {
 
 	bool didTap = false;
 
-	public SpriteRenderer sprite;
-
 	void Start(){
 		InvokeRepeating ("treatIncreaseSec", 1.0f, 1.0f);
 	}
@@ -33,8 +31,6 @@ public class DogTreats : MonoBehaviour {
 	void FixedUpdate(){
 		if (didTap == true) {
 			totalTreats += Mathf.Round(treatsPerTap * treatsMultiplier);
-			//sprite.color = new Color (1f, 1f, 1f, Mathf.PingPong (Time.time * speed, max));
-				//sprite something to activate on tap
 			didTap = false;
 		}
 	}
