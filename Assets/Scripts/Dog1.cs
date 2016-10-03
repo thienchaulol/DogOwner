@@ -13,9 +13,9 @@ public class Dog1 : MonoBehaviour {
 	public float purchasePrice;
 
 	public DogTreats player;
-	public float treatsPerSec;
-	public float newTreatsPerSec;
-	public float numberOfUpgrades;
+	float treatsPerSec;
+	float newTreatsPerSec;
+	float numberOfUpgrades;
 
 	bool maxed = false;
 

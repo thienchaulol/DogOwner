@@ -66,7 +66,8 @@ public class Toy1 : MonoBehaviour {
 	IEnumerator toyNotifFunc() {
 		//Debug.Log("Before Waiting 2 seconds");
 		if(show)
-		toyNotif.text = "You've discovered a: " + toyName + " in " + taps + " taps.";
+			toyNotif.text = "You've discovered a: " + toyName + " in " + taps + " taps." + "\n"
+				+ "Treat per tap and per second increased by: " + treatMultFactor * 100f + "%";
 		yield return new WaitForSeconds(10);
 		toyNotif.text = "";
 		//Debug.Log("After Waiting 2 Seconds");
@@ -74,7 +75,8 @@ public class Toy1 : MonoBehaviour {
 
 	IEnumerator toyNextNotifFunc(){
 		if(show)
-			toyNotif.text = "You've discovered another: " + toyName + " in " + taps+ " taps.";
+			toyNotif.text = "You've discovered a: " + toyName + " in " + taps + " taps." + "\n"
+				+ "Treat per tap and per second increased by: " + treatMultFactor * 100f + "%";
 		yield return new WaitForSeconds(10);
 		toyNotif.text = "";
 	}
