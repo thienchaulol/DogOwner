@@ -8,6 +8,8 @@ public class DogTreats : MonoBehaviour {
 	public float playerTreatsPerSec = 0f;
 	public float treatsMultiplier = 1f;
 
+	public bool showNotif = false;
+
 	public UnityEngine.UI.Text disp;
 
 	bool didTap = false;
@@ -20,8 +22,8 @@ public class DogTreats : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Space)/* || Input.GetMouseButtonDown (0)*/) {
 			didTap = true;
 		}
-		disp.text = "Dog Treats: " + Mathf.Round(totalTreats) + "\n" + "Dog Treats per Tap: " + treatsPerTap 
-			+ "\n" + "Treats per second: " + Mathf.Round(playerTreatsPerSec);
+		disp.text = "Dog Treats: " + Mathf.Round(totalTreats) + "\n" + "Dog Treats per Tap: " + Mathf.Round(treatsPerTap * treatsMultiplier)
+			+ "\n" + "Treats per second: " + Mathf.Round(playerTreatsPerSec * treatsMultiplier);
 	}
 
 	void treatIncreaseSec(){

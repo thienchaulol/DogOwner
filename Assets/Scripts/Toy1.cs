@@ -14,7 +14,7 @@ public class Toy1 : MonoBehaviour {
 	public UnityEngine.UI.Text toyNotif;
 
 	public bool received = false;
-	public bool show = false;
+	//public bool show = false;
 	bool didTap = false;
 	int taps = 0;
 
@@ -26,8 +26,9 @@ public class Toy1 : MonoBehaviour {
 	void Update () {
 		if (numOfUpgrades == 0) {
 			disp.text = "Toy: " + toyName + "\n" + "Receive chance every tap: " + toyChance * 100f + "%";
-		} else if (numOfUpgrades > 0){
-			disp.text = "Toy: " + toyName + "\tLevel: " + numOfUpgrades + "\n" + "Receive chance every tap: " + toyChance * 100f + "%"
+		}
+		if (numOfUpgrades > 0){
+			disp.text = "Toy: " + toyName + " \tLevel: " + numOfUpgrades + "\n" + "Receive chance every tap: " + toyChance * 100f + "%"
 				+ "\n" + "Increases all treat tap/accumulation by: " + treatMultFactor * 100f + "%" + "\n";
 		}
 		if (Input.GetKeyDown (KeyCode.Space)) {
@@ -38,18 +39,18 @@ public class Toy1 : MonoBehaviour {
 
 	void FixedUpdate(){
 		rndNum = Random.Range(0,maxRange);
-		if (didTap) {
+		if (didTap && !player.showNotif) {
 			if (rndNum == receiveNumber) {
 				if (numOfUpgrades > 0) {
-					show = true;
+					player.showNotif = true;
 					StartCoroutine (toyNextNotifFunc());
-					show = false;
+					player.showNotif = false;
 					player.treatsMultiplier += .2f;
 					treatMultFactor += .2f;
 				} else {
-					show = true;
+					player.showNotif = true;
 					StartCoroutine (toyNotifFunc());
-					show = false;
+					player.showNotif = false;
 					player.treatsMultiplier *= treatMultFactor;
 				}
 				maxRange *= 2;
@@ -65,7 +66,7 @@ public class Toy1 : MonoBehaviour {
 
 	IEnumerator toyNotifFunc() {
 		//Debug.Log("Before Waiting 2 seconds");
-		if(show)
+		if(player.showNotif)
 			toyNotif.text = "You've discovered a: " + toyName + " in " + taps + " taps." + "\n"
 				+ "Treat per tap and per second increased by: " + treatMultFactor * 100f + "%";
 		yield return new WaitForSeconds(10);
@@ -74,7 +75,7 @@ public class Toy1 : MonoBehaviour {
 	}
 
 	IEnumerator toyNextNotifFunc(){
-		if(show)
+		if(player.showNotif)
 			toyNotif.text = "You've discovered a: " + toyName + " in " + taps + " taps." + "\n"
 				+ "Treat per tap and per second increased by: " + treatMultFactor * 100f + "%";
 		yield return new WaitForSeconds(10);
