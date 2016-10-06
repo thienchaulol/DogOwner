@@ -42,7 +42,7 @@ public class TreatTapSprite : MonoBehaviour {
 
 	void Movement(){
 		if (this.gameObject.GetComponent<SpriteRenderer> ().sprite != null) {
-			transform.Translate (Vector2.up * spriteSpeed * Time.deltaTime);
+			transform.Translate (Vector2.down * spriteSpeed * Time.deltaTime);
 		}
 	}
 }
