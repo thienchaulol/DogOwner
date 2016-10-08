@@ -45,6 +45,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\BG1.cs" />
      <Compile Include="Assets\Scripts\Dog1.cs" />
      <Compile Include="Assets\Scripts\DogSprite.cs" />
      <Compile Include="Assets\Scripts\DogTreats.cs" />

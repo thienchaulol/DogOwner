@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Toy1 : MonoBehaviour {
 
-	public string toyName = "Squeeky Ball";
+	public string toyName;
 	public float toyChance = 0.01f;
 	public float treatMultFactor;
 	public int maxRange;
