@@ -26,14 +26,11 @@ public class TreatTapSprite : MonoBehaviour {
 		}
 		Movement ();
 		displayTime -= Time.deltaTime;
-		if (displayTime <= 0f) {
-			this.gameObject.GetComponent<SpriteRenderer> ().sprite = null;
-			displayTime = resetDisplayTime;
-			transform.position = initialPos;
-		}
+		removeSprite ();
 	}
 
 	void FixedUpdate(){
+		//shows sprite
 		if (didTap && displayTime > 0f) {
 			this.gameObject.GetComponent<SpriteRenderer> ().sprite = dogTreat;
 		}
@@ -41,8 +38,18 @@ public class TreatTapSprite : MonoBehaviour {
 	}
 
 	void Movement(){
+		//moves sprite
 		if (this.gameObject.GetComponent<SpriteRenderer> ().sprite != null) {
 			transform.Translate (Vector2.down * spriteSpeed * Time.deltaTime);
+		}
+	}
+
+	void removeSprite(){
+		//removes sprite
+		if (displayTime <= 0f) {
+			this.gameObject.GetComponent<SpriteRenderer> ().sprite = null;
+			displayTime = resetDisplayTime;
+			transform.position = initialPos;
 		}
 	}
 }

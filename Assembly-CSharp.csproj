@@ -52,6 +52,8 @@
      <Compile Include="Assets\Scripts\DogTreatsMultiplier.cs" />
      <Compile Include="Assets\Scripts\Toy1.cs" />
      <Compile Include="Assets\Scripts\TreatTapSprite.cs" />
+     <Compile Include="Assets\Scripts\TreatTapSprite2.cs" />
+     <Compile Include="Assets\Scripts\TreatTapSpritePooler.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
