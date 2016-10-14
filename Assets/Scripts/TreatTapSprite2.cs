@@ -19,7 +19,9 @@ public class TreatTapSprite2 : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Space)) {
 			didTap = true;
 		}
-		TreatPool ();
+		if(!gameObject.name.Contains("(Clone)")){
+			TreatPool ();
+		}
 		Movement ();
 		displayTime -= Time.deltaTime;
 		RefreshGameObj ();

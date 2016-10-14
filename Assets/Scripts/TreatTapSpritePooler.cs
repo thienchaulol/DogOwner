@@ -13,6 +13,9 @@ public class TreatTapSpritePooler : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		pooledObjects = new List<GameObject> ();
+		if (pooledObjects == null) {
+			Debug.Log ("list is null");
+		}
 
 		for (int i = 0; i < pooledAmount; i++) {
 			GameObject obj = (GameObject)Instantiate (pooledObject);
