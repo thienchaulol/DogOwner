@@ -11,7 +11,11 @@ public class DogTreats : MonoBehaviour {
 
 	public bool showNotif = false;
 
-	public UnityEngine.UI.Text disp;
+	//public UnityEngine.UI.Text disp;
+
+	public UnityEngine.UI.Text totalTreatsDisp;
+	public UnityEngine.UI.Text treatsPerTapDisp;
+	public UnityEngine.UI.Text treatsPerSecDisp;
 
 	bool didTap = false;
 
@@ -25,8 +29,11 @@ public class DogTreats : MonoBehaviour {
 			dogTreat.gameObject.SetActive (true);
 			dogTreat.didTap = true;
 		}
-		disp.text = "Dog Treats: " + Mathf.Round(totalTreats) + "\n" + "Dog Treats per Tap: " + Mathf.Round(treatsPerTap * treatsMultiplier)
-			+ "\n" + "Treats per second: " + Mathf.Round(playerTreatsPerSec * treatsMultiplier);
+		//disp.text = "Dog Treats: " + Mathf.Round(totalTreats) + "\n" + "Dog Treats per Tap: " + Mathf.Round(treatsPerTap * treatsMultiplier)
+		//	+ "\n" + "Treats per second: " + Mathf.Round(playerTreatsPerSec * treatsMultiplier);
+		totalTreatsDisp.text = "Dog Treats: " + Mathf.Round (totalTreats) + "\n";
+		treatsPerTapDisp.text = "Dog Treats per tap: " + Mathf.Round(treatsPerTap * treatsMultiplier) + "\n";
+		treatsPerSecDisp.text = "Treats per second: " + Mathf.Round(playerTreatsPerSec * treatsMultiplier) + "\n";
 	}
 
 	void treatIncreaseSec(){

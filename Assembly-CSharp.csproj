@@ -50,8 +50,8 @@
      <Compile Include="Assets\Scripts\DogSprite.cs" />
      <Compile Include="Assets\Scripts\DogTreats.cs" />
      <Compile Include="Assets\Scripts\DogTreatsMultiplier.cs" />
+     <Compile Include="Assets\Scripts\Old Scripts\TreatTapSprite.cs" />
      <Compile Include="Assets\Scripts\Toy1.cs" />
-     <Compile Include="Assets\Scripts\TreatTapSprite.cs" />
      <Compile Include="Assets\Scripts\TreatTapSprite2.cs" />
      <Compile Include="Assets\Scripts\TreatTapSpritePooler.cs" />
  <Reference Include="UnityEngine.UI">

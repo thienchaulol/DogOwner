@@ -2,14 +2,12 @@
 using System.Collections;
 
 public class DogSprite : MonoBehaviour {
-
 	public Dog1 player;
-
 	public Sprite dog;
 	public float spriteSpeed;
 	public float spriteJumpHeight;
-
-	bool didTap = false;
+	bool click = false;
+	bool jumped = false;
 	Vector2 initialPos;
 
 	void Start(){
@@ -20,24 +18,21 @@ public class DogSprite : MonoBehaviour {
 	void Update () {
 		if (player.numberOfUpgrades > 0f) {
 			this.gameObject.GetComponent<SpriteRenderer> ().sprite = dog;
-			if (Input.GetKeyDown (KeyCode.Space)) {
-				didTap = true;
+			if (click) {
+				Jump ();
+				Fall ();
 			}
-			Jump ();
-			Fall ();
 		} else {
 			this.gameObject.GetComponent<SpriteRenderer> ().sprite = null;
 		}
 	}
 
-	bool jumped = false;
 	void Jump(){
 		if (!jumped) {
-			if (didTap) {
+			if (click) {
 				transform.Translate (Vector2.up * spriteSpeed * Time.deltaTime);
 				if (transform.position.y > initialPos.y + spriteJumpHeight) {
 					jumped = true;
-					didTap = false;
 					return;
 				}
 			}
@@ -49,9 +44,16 @@ public class DogSprite : MonoBehaviour {
 			transform.Translate (Vector2.down * spriteSpeed * Time.deltaTime);
 			if (transform.position.y <= initialPos.y) {
 				jumped = false;
+				click = false;
 				return;
 			}
 		}
 	}
 
+	void OnMouseDown(){
+		if (player.numberOfUpgrades > 0) {
+			//Debug.Log ("clicked");
+			click = true;
+		}
+	}
 }

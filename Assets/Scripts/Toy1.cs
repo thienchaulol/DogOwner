@@ -75,9 +75,9 @@ public class Toy1 : MonoBehaviour {
 	}
 
 	IEnumerator toyNextNotifFunc(){
-		if(player.showNotif)
+		if (player.showNotif)
 			toyNotif.text = "You've discovered a: " + toyName + " in " + taps + " taps." + "\n"
-				+ "Treat per tap and per second increased by: " + treatMultFactor * 100f + "%";
+			+ "TODO: FIX NEW TOY DISCOVERY DISPLAY";/*New treat per tap and per second increase ratio:  + treatMultFactor * 100f + "%";*/
 		yield return new WaitForSeconds(10);
 		toyNotif.text = "";
 	}
