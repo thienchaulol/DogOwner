@@ -19,7 +19,7 @@ public class TreatTapSprite2 : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Space)) {
 			didTap = true;
 		}
-		if(!gameObject.name.Contains("(Clone)")){
+		if(!gameObject.name.Contains("(Clone)")){	//prevents pooling of NULL object (null reference exception)
 			TreatPool ();
 		}
 		Movement ();

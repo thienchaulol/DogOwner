@@ -19,8 +19,6 @@ public class DogSprite : MonoBehaviour {
 	void Update () {
 		if (player.numberOfUpgrades > 0f) {	//display dog sprite when dog is purchaed
 			this.gameObject.GetComponent<SpriteRenderer> ().sprite = dog;
-			//want to display treat aura on dog: tiny random treats appearing around the dog while purchased
-			//									 follow dog object when dog jumps
 			if (click) {	//if dog is clicked on dog will jump
 				Jump ();
 				Fall ();

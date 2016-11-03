@@ -13,13 +13,13 @@ public class Dog1 : MonoBehaviour {
 	public float purchasePrice;	//purchase price and upgrade price
 	public float numberOfUpgrades;	//total number of upgrades
 	public DogTreats player;	//used to reference player
+	public UnityEngine.UI.Text disp;	//button display
 	float treatsPerSec;	//current treats per second from dog
 	float newTreatsPerSec;	//new treats per second after upgrade
 	bool maxed = false;	//can only upgrade dog 10 times
-	public UnityEngine.UI.Text disp;	//button display
 
 	void Update () {
-		//display dog info
+		//display dog info on button
 		disp.text = "Dog: " + DogName + "\n" + "Price: " + purchasePrice + "\n";
 		if (numberOfUpgrades < 10) {
 			disp.text = "Treats/Sec: " + treatsPerSec + "\n" + "Dog: " + DogName + "\n" + "Upgrade: " + Mathf.Round(purchasePrice) + "\n";
@@ -32,9 +32,8 @@ public class Dog1 : MonoBehaviour {
 
 	//purchasing an upgrade
 	public void Tapped (){
-		if(maxed == false)
-		//algorithm to determine treats per second and upgrade price
-		if (player.totalTreats >= purchasePrice) {
+		if(maxed == false)	//max # of upgrades is 10
+		if (player.totalTreats >= purchasePrice) {	//algorithm to determine treats per second and upgrade price
 			newTreatsPerSec = Mathf.Round (purchasePrice / 75f);
 			player.totalTreats -= purchasePrice;
 			numberOfUpgrades += 1f;
