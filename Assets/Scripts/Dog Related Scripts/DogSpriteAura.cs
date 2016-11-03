@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class DogSpriteAura : MonoBehaviour {
 
@@ -10,10 +11,18 @@ public class DogSpriteAura : MonoBehaviour {
 	public float displayTime;	//display aura time
 	public float resetDisplayTime;	//resets display time
 	public float spriteSpeed;	//levetation speed
-	private Vector2 initialPos;	//initial position of game object
+	IList<Vector2> positions = new List<Vector2>();	//list to hold possible positions of sprite aura
+	Vector2 p1;
+	Vector2 p2;
+	Vector3 p3;
 
 	void Start(){
-		initialPos = transform.position;	//store initial position
+		p1 = transform.position;	//calc p1
+		positions.Add(p1);	//store p1
+		p2 = new Vector2(p1.x - 0.25f, p1.y - 0.25f);	//calc p2
+		positions.Add(p2);	//store p2
+		p3 = new Vector2 (p1.x + 0.25f, p1.y - 0.25f);	//calc p3
+		positions.Add(p3);	//store p3
 	}
 
 	// Update is called once per frame
@@ -28,10 +37,6 @@ public class DogSpriteAura : MonoBehaviour {
 		}
 	}
 
-	//change placements of game object, duplicate as well
-	void auraPlacement(){
-	}
-
 	//deals with movement of game object
 	void Movement(){
 		if (displayTime > 0f) {	//move sprite if displayTime > 0
@@ -42,8 +47,8 @@ public class DogSpriteAura : MonoBehaviour {
 	//resets game object for next movement
 	void RefreshGameObj(){
 		if (displayTime <= 0f) {	//reset display time when displayTime <= 0
-			displayTime = resetDisplayTime;
-			transform.position = initialPos;	//reset position
+			displayTime = resetDisplayTime;	//reset display time
+			transform.position = positions[Random.Range(0, positions.Count)];	//choose new position from positions list
 		}
 	}
 }
