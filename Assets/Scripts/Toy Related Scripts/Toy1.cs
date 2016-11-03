@@ -8,19 +8,17 @@ public class Toy1 : MonoBehaviour {
 	public float treatMultFactor;
 	public int maxRange;
 	public int receiveNumber;
-
 	public DogTreats player;
 	public UnityEngine.UI.Text disp;
 	public UnityEngine.UI.Text toyNotif;
-
 	public bool received = false;
-	//public bool show = false;
 	bool didTap = false;
 	int taps = 0;
 
 	public bool testReceive = false;
 	int rndNum;
 	public float numOfUpgrades = 0f;
+
 
 	// Update is called once per frame
 	void Update () {
@@ -43,15 +41,15 @@ public class Toy1 : MonoBehaviour {
 			if (rndNum == receiveNumber) {
 				if (numOfUpgrades > 0) {
 					player.showNotif = true;
-					StartCoroutine (toyNextNotifFunc());
-					player.showNotif = false;
 					player.treatsMultiplier += .2f;
 					treatMultFactor += .2f;
+					StartCoroutine (toyNextNotifFunc());
+					player.showNotif = false;
 				} else {
 					player.showNotif = true;
+					player.treatsMultiplier *= treatMultFactor;
 					StartCoroutine (toyNotifFunc());
 					player.showNotif = false;
-					player.treatsMultiplier *= treatMultFactor;
 				}
 				maxRange *= 2;
 				toyChance /= 2f;
@@ -68,7 +66,7 @@ public class Toy1 : MonoBehaviour {
 		//Debug.Log("Before Waiting 2 seconds");
 		if(player.showNotif)
 			toyNotif.text = "You've discovered a: " + toyName + " in " + taps + " taps." + "\n"
-				+ "Treat per tap and per second increased by: " + treatMultFactor * 100f + "%";
+				+ "Treats per tap and Treats per second increased to: " + treatMultFactor * 100f + "%";
 		yield return new WaitForSeconds(10);
 		toyNotif.text = "";
 		//Debug.Log("After Waiting 2 Seconds");
@@ -76,8 +74,8 @@ public class Toy1 : MonoBehaviour {
 
 	IEnumerator toyNextNotifFunc(){
 		if (player.showNotif)
-			toyNotif.text = "You've discovered a: " + toyName + " in " + taps + " taps." + "\n"
-			+ "TODO: FIX NEW TOY DISCOVERY DISPLAY";/*New treat per tap and per second increase ratio:  + treatMultFactor * 100f + "%";*/
+			toyNotif.text = "You've discovered another: " + toyName + " in " + taps + " taps." + "\n"
+			+ "Treats per tap and Treats per second increased to: "  + treatMultFactor * 100f + "%";
 		yield return new WaitForSeconds(10);
 		toyNotif.text = "";
 	}

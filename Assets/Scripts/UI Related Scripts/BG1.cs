@@ -4,7 +4,6 @@ using System.Collections;
 public class BG1 : MonoBehaviour {
 
 	public DogTreats player;
-
 	public string BGName;
 	public UnityEngine.UI.Text disp;
 	public float numOfUpgrades = 0f;

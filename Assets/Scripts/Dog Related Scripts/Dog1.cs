@@ -9,19 +9,17 @@ public class Dog1 : MonoBehaviour {
 	//have "toys" that unlock randomly per tap only when certain dogs are at certain levels to incentivise tapping
 	//toys will increase interest in the stagnant end game
 
-	public string DogName;
-	public float purchasePrice;
-
-	public DogTreats player;
-	float treatsPerSec;
-	float newTreatsPerSec;
-	public float numberOfUpgrades;
-
-	bool maxed = false;
-
-	public UnityEngine.UI.Text disp;
+	public string DogName;	//type of dog
+	public float purchasePrice;	//purchase price and upgrade price
+	public float numberOfUpgrades;	//total number of upgrades
+	public DogTreats player;	//used to reference player
+	float treatsPerSec;	//current treats per second from dog
+	float newTreatsPerSec;	//new treats per second after upgrade
+	bool maxed = false;	//can only upgrade dog 10 times
+	public UnityEngine.UI.Text disp;	//button display
 
 	void Update () {
+		//display dog info
 		disp.text = "Dog: " + DogName + "\n" + "Price: " + purchasePrice + "\n";
 		if (numberOfUpgrades < 10) {
 			disp.text = "Treats/Sec: " + treatsPerSec + "\n" + "Dog: " + DogName + "\n" + "Upgrade: " + Mathf.Round(purchasePrice) + "\n";
@@ -32,8 +30,10 @@ public class Dog1 : MonoBehaviour {
 		}
 	}
 
+	//purchasing an upgrade
 	public void Tapped (){
 		if(maxed == false)
+		//algorithm to determine treats per second and upgrade price
 		if (player.totalTreats >= purchasePrice) {
 			newTreatsPerSec = Mathf.Round (purchasePrice / 75f);
 			player.totalTreats -= purchasePrice;
