@@ -3,80 +3,80 @@ using System.Collections;
 
 public class Toy1 : MonoBehaviour {
 
-	public string toyName;
-	public float toyChance = 0.01f;
-	public float treatMultFactor;
-	public int maxRange;
-	public int receiveNumber;
-	public DogTreats player;
-	public UnityEngine.UI.Text disp;
-	public UnityEngine.UI.Text toyNotif;
-	public bool received = false;
-	bool didTap = false;
-	int taps = 0;
+	public string toyName;	//name of toy
+	public float toyChance = 0.01f;	//chance to receive toy
+	public float treatMultFactor;	//treat increase factor
+	public int maxRange;	//used to change toy discovery chance
+	public int receiveNumber;	//used to change toy discovery chance
+	public DogTreats player;	//reference to player
+	public UnityEngine.UI.Text disp;	//button display of toy info
+	public UnityEngine.UI.Text toyNotif;	//toy notification when found
+	public bool received = false;	//bool for toy discovery
+	bool didTap = false;	//bool to check user tap
+	int taps = 0;	//used do display how many taps to acquire treat
 
-	public bool testReceive = false;
-	int rndNum;
-	public float numOfUpgrades = 0f;
+	public bool testReceive = false;	//for testing
+	int rndNum;	//used to determine toy discovery chance
+	public float numOfUpgrades = 0f;	//tracks how many times toys are upgraded
 
 
 	// Update is called once per frame
 	void Update () {
-		if (numOfUpgrades == 0) {
+		if (numOfUpgrades == 0) {	//receive chance info
 			disp.text = "Toy: " + toyName + "\n" + "Receive chance every tap: " + toyChance * 100f + "%";
 		}
-		if (numOfUpgrades > 0){
+		if (numOfUpgrades > 0){	//toy info after received
 			disp.text = "Toy: " + toyName + " \tLevel: " + numOfUpgrades + "\n" + "Receive chance every tap: " + toyChance * 100f + "%"
 				+ "\n" + "Increases all treat tap/accumulation by: " + treatMultFactor * 100f + "%" + "\n";
 		}
-		if (Input.GetKeyDown (KeyCode.Space)) {
+		if (Input.GetKeyDown (KeyCode.Space)) {	//records taps
 			taps += 1;
 			didTap = true;
 		}
 	}
 
 	void FixedUpdate(){
-		rndNum = Random.Range(0,maxRange);
+		rndNum = Random.Range(0,maxRange);	//get random number
 		if (didTap && !player.showNotif) {
 			if (rndNum == receiveNumber) {
 				if (numOfUpgrades > 0) {
-					player.showNotif = true;
-					player.treatsMultiplier += .2f;
-					treatMultFactor += .2f;
-					StartCoroutine (toyNextNotifFunc());
-					player.showNotif = false;
+					player.showNotif = true;	//set showNotif to true(can display message)
+					player.treatsMultiplier += .2f;	//increase treat accumulation
+					treatMultFactor += .2f;	//increase treat mult factor
+					StartCoroutine (toyNextNotifFunc());	//display notification message
+					player.showNotif = false;	//set showNotif to false(can't display message)
 				} else {
-					player.showNotif = true;
-					player.treatsMultiplier *= treatMultFactor;
-					StartCoroutine (toyNotifFunc());
-					player.showNotif = false;
+					player.showNotif = true;	//set showNotif to true(can display message)
+					player.treatsMultiplier *= treatMultFactor;	//increase treat accumulation
+					StartCoroutine (toyNotifFunc());	//display notification message
+					player.showNotif = false;	//set showNotif to false(can't display message)
 				}
-				maxRange *= 2;
+				maxRange *= 2;	//lower chance of receiving toy
 				toyChance /= 2f;
-				numOfUpgrades += 1f;
-				taps = 0;
+				numOfUpgrades += 1f;	//record number of upgrades
+				taps = 0;	//reset number of taps
 			}
 		}
-		if (testReceive)
+		if (testReceive)	//test toy display
 			StartCoroutine (toyNotifFunc ());
 		didTap = false;
 	}
 
 	IEnumerator toyNotifFunc() {
-		//Debug.Log("Before Waiting 2 seconds");
 		if(player.showNotif)
-			toyNotif.text = "You've discovered a: " + toyName + " in " + taps + " taps." + "\n"
-				+ "Treats per tap and Treats per second increased to: " + treatMultFactor * 100f + "%";
-		yield return new WaitForSeconds(10);
-		toyNotif.text = "";
-		//Debug.Log("After Waiting 2 Seconds");
+			//set notification
+			toyNotif.text = "You found a: " + toyName/* + " in " + taps + " taps." + "\n"
+				+ "Treats per tap and Treats per second increased to: " + treatMultFactor * 100f + "%"*/;
+		yield return new WaitForSeconds(10);	//notificaion displays for 10 seconds
+		toyNotif.text = "";	//remove notification
 	}
 
 	IEnumerator toyNextNotifFunc(){
 		if (player.showNotif)
-			toyNotif.text = "You've discovered another: " + toyName + " in " + taps + " taps." + "\n"
-			+ "Treats per tap and Treats per second increased to: "  + treatMultFactor * 100f + "%";
-		yield return new WaitForSeconds(10);
+			//set notification
+			toyNotif.text = "You found another: " + toyName/* + " in " + taps + " taps." + "\n"
+			+ "Treats per tap and Treats per second increased to: "  + treatMultFactor * 100f + "%"*/;
+		yield return new WaitForSeconds(10);	//notificaion displays for 10 seconds
 		toyNotif.text = "";
 	}
 

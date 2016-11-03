@@ -3,31 +3,32 @@ using System.Collections;
 
 public class TreatTapSprite2 : MonoBehaviour {
 	
-	public TreatTapSpritePooler theObjectPool;
-	public float displayTime;
-	public float resetDisplayTime;
-	public float spriteSpeed;
-	public bool didTap = false;
-	private Vector2 initialPos;
+	public TreatTapSpritePooler theObjectPool;	//reference to object pool script
+	public float displayTime;	//display time of game object
+	public float resetDisplayTime;	//reset display time of game object
+	public float spriteSpeed;	//speed of game object
+	public bool didTap = false;	//var to record taps
+	private Vector2 initialPos;	//initial position of game object
 
 	void Start(){
-		initialPos = transform.position;
-		gameObject.SetActive (false);
+		initialPos = transform.position;	//set initial position of game object
+		gameObject.SetActive (false);	//deactivate game object
 	}
 
 	void Update () {
-		if (Input.GetKeyDown (KeyCode.Space)) {
+		if (Input.GetKeyDown (KeyCode.Space)) {	//record taps
 			didTap = true;
 		}
 		if(!gameObject.name.Contains("(Clone)")){	//prevents pooling of NULL object (null reference exception)
 			TreatPool ();
 		}
-		Movement ();
-		displayTime -= Time.deltaTime;
-		RefreshGameObj ();
+		Movement ();	//move object
+		displayTime -= Time.deltaTime;	//display object for set time
+		RefreshGameObj ();	//refresh game object for next tap
 	}
 
 	void Movement(){
+		//only move if the game object is active and if it is able to be displayed
 		if (gameObject.activeSelf && displayTime > 0f) {
 			transform.Translate (Vector2.down * spriteSpeed * Time.deltaTime);
 		}
@@ -35,18 +36,18 @@ public class TreatTapSprite2 : MonoBehaviour {
 
 	void RefreshGameObj(){
 		if (displayTime <= 0f) {
-			didTap = false;
-			displayTime = resetDisplayTime;
-			transform.position = initialPos;
-			gameObject.SetActive (false);
+			didTap = false;	//reset tap recorder
+			displayTime = resetDisplayTime;	//reset display time
+			transform.position = initialPos;	//reset position
+			gameObject.SetActive (false);	//deactivate game object for next tap
 		}
 	}
 
-	void TreatPool(){
-		if (Input.GetKeyDown (KeyCode.Space) && didTap) {
-			GameObject newTreat = theObjectPool.GetPooledObject ();
-			newTreat.transform.position = initialPos;
-			newTreat.SetActive (true);
+	void TreatPool(){	//object pool of treats
+		if (Input.GetKeyDown (KeyCode.Space) && didTap) {	//use objects on each tap or spacebar
+			GameObject newTreat = theObjectPool.GetPooledObject ();	//acquire pooled object
+			newTreat.transform.position = initialPos;	//set game object's position
+			newTreat.SetActive (true);	//set game object to active for use
 		}
 	}
 }

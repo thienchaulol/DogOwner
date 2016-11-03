@@ -12,9 +12,9 @@ public class DogSpriteAura : MonoBehaviour {
 	public float resetDisplayTime;	//resets display time
 	public float spriteSpeed;	//levetation speed
 	IList<Vector2> positions = new List<Vector2>();	//list to hold possible positions of sprite aura
-	Vector2 p1;
-	Vector2 p2;
-	Vector3 p3;
+	Vector2 p1;	//position 1
+	Vector2 p2;	//position 2
+	Vector3 p3;	//position 3
 
 	void Start(){
 		p1 = transform.position;	//calc p1

@@ -3,45 +3,43 @@ using System.Collections;
 
 public class DogTreats : MonoBehaviour {
 
-	public TreatTapSprite2 dogTreat;
-	public float totalTreats = 0f;
-	public float treatsPerTap = 1f;
-	public float playerTreatsPerSec = 0f;
-	public float treatsMultiplier = 1f;
+	public TreatTapSprite2 dogTreat;	//reference to treat tap sprite for object pooling
+	public float totalTreats = 0f;	//total treats
+	public float treatsPerTap = 1f;	//treats per tap
+	public float playerTreatsPerSec = 0f;	//total treats per second
+	public float treatsMultiplier = 1f;	//treats multiplier
 
-	public bool showNotif = false;
+	public bool showNotif = false;	//bool to show toy notification
 
 	//public UnityEngine.UI.Text disp;
 
-	public UnityEngine.UI.Text totalTreatsDisp;
-	public UnityEngine.UI.Text treatsPerTapDisp;
-	public UnityEngine.UI.Text treatsPerSecDisp;
+	public UnityEngine.UI.Text totalTreatsDisp;	//total treats display
+	public UnityEngine.UI.Text treatsPerTapDisp;	//treats per tap display
+	public UnityEngine.UI.Text treatsPerSecDisp;	//treats per sec display
 
-	bool didTap = false;
+	bool didTap = false;	//tap recorder
 
 	void Start(){
-		InvokeRepeating ("treatIncreaseSec", 1.0f, 1.0f);
+		InvokeRepeating ("treatIncreaseSec", 1.0f, 1.0f);	//calls treat increase function every second
 	}
 
 	void Update(){
-		if (Input.GetKeyDown (KeyCode.Space)/* || Input.GetMouseButtonDown (0)*/) {
-			didTap = true;
-			dogTreat.gameObject.SetActive (true);
-			dogTreat.didTap = true;
+		if (Input.GetKeyDown (KeyCode.Space)/* || Input.GetMouseButtonDown (0)*/) {	//records taps from user
+			didTap = true;	//record tap
+			dogTreat.gameObject.SetActive (true);	//for object pooling; sets game object(bone sprite) active when user taps
+			dogTreat.didTap = true;	//object pooling
 		}
-		//disp.text = "Dog Treats: " + Mathf.Round(totalTreats) + "\n" + "Dog Treats per Tap: " + Mathf.Round(treatsPerTap * treatsMultiplier)
-		//	+ "\n" + "Treats per second: " + Mathf.Round(playerTreatsPerSec * treatsMultiplier);
-		totalTreatsDisp.text = "Dog Treats: " + Mathf.Round (totalTreats) + "\n";
-		treatsPerTapDisp.text = "Dog Treats per tap: " + Mathf.Round(treatsPerTap * treatsMultiplier) + "\n";
-		treatsPerSecDisp.text = "Treats per second: " + Mathf.Round(playerTreatsPerSec * treatsMultiplier) + "\n";
+		totalTreatsDisp.text = "Dog Treats: " + Mathf.Round (totalTreats) + "\n";	//total treats display
+		treatsPerTapDisp.text = "Dog Treats per tap: " + Mathf.Round(treatsPerTap * treatsMultiplier) + "\n";	//TPT display
+		treatsPerSecDisp.text = "Treats per second: " + Mathf.Round(playerTreatsPerSec * treatsMultiplier) + "\n";	//TPS display
 	}
 
-	void treatIncreaseSec(){
+	void treatIncreaseSec(){	//treat increase function
 		totalTreats += Mathf.Round(playerTreatsPerSec * treatsMultiplier);
 	}
 
 	void FixedUpdate(){
-		if (didTap == true) {
+		if (didTap == true) {	//treats per tap modifier
 			totalTreats += Mathf.Round(treatsPerTap * treatsMultiplier);
 			didTap = false;
 		}
