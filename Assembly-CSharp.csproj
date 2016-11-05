@@ -55,6 +55,7 @@
      <Compile Include="Assets\Scripts\Treat Related Scripts\TreatTapSprite2.cs" />
      <Compile Include="Assets\Scripts\Treat Related Scripts\TreatTapSpritePooler.cs" />
      <Compile Include="Assets\Scripts\UI Related Scripts\BG1.cs" />
+     <Compile Include="Assets\Scripts\UI Related Scripts\ControllingCameraAspectScript.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
