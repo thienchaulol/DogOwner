@@ -25,7 +25,7 @@ public class Dog1 : MonoBehaviour {
 			disp.text = "Treats/Sec: " + treatsPerSec + "\n" + "Dog: " + DogName + "\n" + "Upgrade: " + Mathf.Round(purchasePrice) + "\n";
 		}
 		if (numberOfUpgrades >= 10) {
-			disp.text = "Treats/Sec: " + treatsPerSec + "\n" + "Dog: " + DogName + "\n" + "Upgrade Maxed";
+			disp.text = "Treats/Sec: " + treatsPerSec + "\n" + "Dog: " + DogName + "\n" + "Upgrades Maxed. Congratulations!!";
 			maxed = true;
 		}
 	}
