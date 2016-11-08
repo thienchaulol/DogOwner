@@ -9,12 +9,12 @@ public class DogSpriteAura : MonoBehaviour {
 	//want to display treat aura on dog: tiny random treats appearing around the dog while purchased
 	//									 follow dog object when dog jumps
 	public float spriteSpeed;	//up speed
-	public float initialSpriteSpeed;	//initial up speed
+	float initialSpriteSpeed;	//initial up speed
 	IList<Vector2> positions = new List<Vector2>();	//list to hold possible positions of sprite aura
 	Vector2 p1;	//position 1
 	Vector2 p2;	//position 2
 	Vector2 p3;	//position 3
-	int initialY;	//initial Y of game object
+	float initialY;	//initial Y of game object
 
 	void Start(){
 		initialSpriteSpeed = spriteSpeed;	//store initial sprite speed for upgrades
@@ -28,8 +28,10 @@ public class DogSpriteAura : MonoBehaviour {
 		p3 = new Vector2 (p1.x + 0.25f, p1.y - 0.25f);	//calc p3
 		positions.Add(p3);	//store p3
 
-		//choose random position
-		//set initial y to the random position
+		//choose and set random position
+		transform.position = positions[Random.Range(0, positions.Count)];
+		//set initial y to the initial random position
+		initialY = transform.position.y;
 	}
 
 	// Update is called once per frame
@@ -60,11 +62,9 @@ public class DogSpriteAura : MonoBehaviour {
 		//move sprite up
 		transform.Translate (Vector2.up * spriteSpeed * Time.deltaTime);	//sprite movement
 		//check if it's past the ceiling value
-		if(gameObject.transform.position.y > initialY + 0.25f){
-			//	if so, reset the value and change it's position
-
+		if (transform.position.y > initialY + 0.5f) {
+			//	if so, reset the position to positions 1, 2, or 3
+			transform.position = positions[Random.Range(0, positions.Count)];
 		}
-
-		transform.Translate (Vector2.up * spriteSpeed * Time.deltaTime);	//sprite movement
 	}
 }
