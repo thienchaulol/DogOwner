@@ -13,6 +13,7 @@ public class Dog1 : MonoBehaviour {
 	public float purchasePrice;	//purchase price and upgrade price
 	public float numberOfUpgrades;	//total number of upgrades
 	public DogTreats player;	//used to reference player
+	//public BG1 currentBG;	//keeps track of current background
 	public UnityEngine.UI.Text disp;	//button display
 	float treatsPerSec;	//current treats per second from dog
 	float newTreatsPerSec;	//new treats per second after upgrade
