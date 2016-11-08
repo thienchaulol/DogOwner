@@ -3,6 +3,10 @@ using System.Collections;
 
 public class DogTreats : MonoBehaviour {
 
+	//MAIN CANVAS SCRIPT
+	//public BG1 currentBG;	//keeps track of current background. set "House Party" background when currentBG.numOfUpgrades >= 1
+							//set "Default" background if currentBG.numOfUpgrades < 1
+
 	public TreatTapSprite2 dogTreat;	//reference to treat tap sprite for object pooling
 	public float totalTreats = 0f;	//total treats
 	public float treatsPerTap = 1f;	//treats per tap
