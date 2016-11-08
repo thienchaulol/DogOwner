@@ -6,7 +6,6 @@ public class DogAura : MonoBehaviour {
 
 	public Dog1 player;	//player object
 	public Sprite aura;	//sprite object
-	public DogSprite dogSprite;	//used to remove aura when jumping to avoid glitches
 	public float spriteSpeed;	//up speed
 	public float auraHeight; //how high aura goes before resetting
 	float initialSpriteSpeed;	//initial up speed
@@ -34,13 +33,10 @@ public class DogAura : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (player.numberOfUpgrades > 0f && dogSprite.jumped == false) {	//display dog sprite aura if purchased
+		if (player.numberOfUpgrades > 0f) {	//display dog sprite aura if purchased
 			this.gameObject.GetComponent<SpriteRenderer> ().sprite = aura;
 			speedIncrease ();	//function to increase aura speed
 			Movement ();	//move aura
-		} else if (dogSprite.jumped == true) {	//don't display dog sprite aura if dog jumped
-			this.gameObject.GetComponent<SpriteRenderer> ().sprite = null;
-			resetPosition ();
 		} else {	//don't display dog sprite aura if not purchased
 			this.gameObject.GetComponent<SpriteRenderer> ().sprite = null;
 		}
@@ -59,7 +55,6 @@ public class DogAura : MonoBehaviour {
 	}
 
 	void Movement(){	//deals with movement of game object
-		//pseudocode
 		//move sprite up
 		transform.Translate (Vector2.up * spriteSpeed * Time.deltaTime);	//sprite movement
 		//check if it's past the ceiling value
@@ -80,9 +75,8 @@ public class DogAura : MonoBehaviour {
 		}
 	}
 
-	void resetPosition(){
+	public void resetPosition(){
 		//	if so, reset the position to positions 1, 2, or 3
-		//transform.position = positions[Random.Range(0, positions.Count)];
 		if (currPosition < 2) {
 			currPosition++;
 			transform.position = positions [currPosition];

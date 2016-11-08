@@ -4,6 +4,7 @@ using System.Collections;
 public class DogSprite : MonoBehaviour {
 	public Dog1 player;	//used as reference to dog game object
 	public Sprite dog;	//sprite for dog type
+	public DogAura dogAura;	//dogAura object
 	public float spriteSpeed;	//jump speed when tapped
 	public float spriteJumpHeight;	//jump height when tapped
 	bool click = false;	//bool to check if tapped
@@ -20,8 +21,10 @@ public class DogSprite : MonoBehaviour {
 		if (player.numberOfUpgrades > 0f) {	//display dog sprite when dog is purchaed
 			this.gameObject.GetComponent<SpriteRenderer> ().sprite = dog;
 			if (click) {	//if dog is clicked on dog will jump
+				dogAura.enabled = false;	//disable dog aura when jumping
 				Jump ();
 				Fall ();
+				dogAura.enabled = true;		//enable dog aura when done jumping
 			}
 		} else {	//don't display dog sprite if not purchased
 			this.gameObject.GetComponent<SpriteRenderer> ().sprite = null;
