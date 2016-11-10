@@ -34,7 +34,7 @@ public class DogTreats : MonoBehaviour {
 			dogTreat.gameObject.SetActive (true);	//for object pooling; sets game object(bone sprite) active when user taps
 			dogTreat.didTap = true;	//object pooling
 		}
-		totalTreatsDisp.text = "Treats: " + Mathf.Round (totalTreats) + "\n";	//total treats display
+		totalTreatsDisp.text = Mathf.Round (totalTreats) + "\n";	//total treats display
 		treatsPerTapDisp.text = "Treats per tap: " + Mathf.Round(treatsPerTap * treatsMultiplier) + "\n";	//TPT display
 		treatsPerSecDisp.text = "Treats per second: " + Mathf.Round(playerTreatsPerSec * treatsMultiplier) + "\n";	//TPS display
 		treatsMultDisp.text = "Current treats multiplier: " + Mathf.Round(treatsMultiplier * 100) + "%\n";	//multiplier display
