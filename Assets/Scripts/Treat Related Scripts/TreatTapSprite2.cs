@@ -16,7 +16,7 @@ public class TreatTapSprite2 : MonoBehaviour {
 	}
 
 	void Update () {
-		if (Input.GetKeyDown (KeyCode.Space)) {	//record taps
+		if (Input.GetKeyDown (KeyCode.Space) || Input.GetMouseButtonDown (0)) {	//record taps
 			didTap = true;
 		}
 		if(!gameObject.name.Contains("(Clone)")){	//prevents pooling of NULL object (null reference exception)
@@ -44,7 +44,7 @@ public class TreatTapSprite2 : MonoBehaviour {
 	}
 
 	void TreatPool(){	//object pool of treats
-		if (Input.GetKeyDown (KeyCode.Space) && didTap) {	//use objects on each tap or spacebar
+		if ((Input.GetKeyDown (KeyCode.Space) || Input.GetMouseButtonDown (0)) && didTap) {	//use objects on each tap or spacebar
 			GameObject newTreat = theObjectPool.GetPooledObject ();	//acquire pooled object
 			newTreat.transform.position = initialPos;	//set game object's position
 			newTreat.SetActive (true);	//set game object to active for use

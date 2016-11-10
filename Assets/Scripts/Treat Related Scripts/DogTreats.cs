@@ -20,6 +20,7 @@ public class DogTreats : MonoBehaviour {
 	public UnityEngine.UI.Text totalTreatsDisp;	//total treats display
 	public UnityEngine.UI.Text treatsPerTapDisp;	//treats per tap display
 	public UnityEngine.UI.Text treatsPerSecDisp;	//treats per sec display
+	public UnityEngine.UI.Text treatsMultDisp;	//treats multiplier display
 
 	bool didTap = false;	//tap recorder
 
@@ -28,14 +29,15 @@ public class DogTreats : MonoBehaviour {
 	}
 
 	void Update(){
-		if (Input.GetKeyDown (KeyCode.Space)/* || Input.GetMouseButtonDown (0)*/) {	//records taps from user
+		if (Input.GetKeyDown (KeyCode.Space) || Input.GetMouseButtonDown (0)) {	//records taps from user
 			didTap = true;	//record tap
 			dogTreat.gameObject.SetActive (true);	//for object pooling; sets game object(bone sprite) active when user taps
 			dogTreat.didTap = true;	//object pooling
 		}
-		totalTreatsDisp.text = "Dog Treats: " + Mathf.Round (totalTreats) + "\n";	//total treats display
-		treatsPerTapDisp.text = "Dog Treats per tap: " + Mathf.Round(treatsPerTap * treatsMultiplier) + "\n";	//TPT display
+		totalTreatsDisp.text = "Treats: " + Mathf.Round (totalTreats) + "\n";	//total treats display
+		treatsPerTapDisp.text = "Treats per tap: " + Mathf.Round(treatsPerTap * treatsMultiplier) + "\n";	//TPT display
 		treatsPerSecDisp.text = "Treats per second: " + Mathf.Round(playerTreatsPerSec * treatsMultiplier) + "\n";	//TPS display
+		treatsMultDisp.text = "Current treats multiplier: " + Mathf.Round(treatsMultiplier * 100) + "%\n";	//multiplier display
 	}
 
 	void treatIncreaseSec(){	//treat increase function
