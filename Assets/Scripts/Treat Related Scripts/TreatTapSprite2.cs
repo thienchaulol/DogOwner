@@ -8,23 +8,33 @@ public class TreatTapSprite2 : MonoBehaviour {
 	public float resetDisplayTime;	//reset display time of game object
 	public float spriteSpeed;	//speed of game object
 	public bool didTap = false;	//var to record taps
-	private Vector2 initialPos;	//initial position of game object
+	private Vector2 initialPos;	//initial position for moving game object (x, y)
+	float rotateZ;	//used to rotate object
+	public UnityEngine.GameObject bone;
 
 	void Start(){
 		initialPos = transform.position;	//set initial position of game object
 		gameObject.SetActive (false);	//deactivate game object
+		InvokeRepeating("Rotate", 0.1f, 0.1f);	//rotate every second
 	}
 
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.Space) || Input.GetMouseButtonDown (0)) {	//record taps
 			didTap = true;
 		}
-		if(!gameObject.name.Contains("(Clone)")){	//prevents pooling of NULL object (null reference exception)
+		if(!gameObject.name.Contains("(Clone)")){	//prevents pooling of NULL object (prevents null reference exception)
 			TreatPool ();
 		}
 		Movement ();	//move object
 		displayTime -= Time.deltaTime;	//display object for set time
 		RefreshGameObj ();	//refresh game object for next tap
+	}
+
+	void Rotate(){
+		if (gameObject.activeSelf && displayTime > 0f) {
+			rotateZ += 20f;
+			bone.transform.rotation = Quaternion.Euler (0, 0, rotateZ);	//set rotation
+		}
 	}
 
 	void Movement(){
@@ -38,7 +48,10 @@ public class TreatTapSprite2 : MonoBehaviour {
 		if (displayTime <= 0f) {
 			didTap = false;	//reset tap recorder
 			displayTime = resetDisplayTime;	//reset display time
-			transform.position = initialPos;	//reset position
+			bone.transform.position = initialPos;	//reset position
+			transform.position = initialPos;
+			rotateZ = 0f;
+			transform.rotation = Quaternion.Euler (0, 0, rotateZ);	//reset rotation
 			gameObject.SetActive (false);	//deactivate game object for next tap
 		}
 	}
