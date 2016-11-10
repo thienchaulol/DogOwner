@@ -10,12 +10,14 @@ public class TreatTapSprite2 : MonoBehaviour {
 	public bool didTap = false;	//var to record taps
 	private Vector2 initialPos;	//initial position for moving game object (x, y)
 	float rotateZ;	//used to rotate object
-	public UnityEngine.GameObject bone;
+	public UnityEngine.GameObject bone;	//reference to bone sprite (gameobject)
+	public float ceilingVal;	//height to drop bone from
 
 	void Start(){
-		initialPos = transform.position;	//set initial position of game object
-		gameObject.SetActive (false);	//deactivate game object
-		InvokeRepeating("Rotate", 0.1f, 0.1f);	//rotate every second
+		initialPos = new Vector2 (Random.Range(-2f, 2f), ceilingVal);	//set initial(random) position of game object
+		gameObject.transform.position = initialPos;
+		gameObject.SetActive (false);	//deactivate game object until tap
+		InvokeRepeating("Rotate", 0.1f, 0.1f);	//rotate every second=
 	}
 
 	void Update () {
@@ -48,7 +50,7 @@ public class TreatTapSprite2 : MonoBehaviour {
 		if (displayTime <= 0f) {
 			didTap = false;	//reset tap recorder
 			displayTime = resetDisplayTime;	//reset display time
-			transform.position = initialPos;	//reset position
+			transform.position = new Vector2 (Random.Range(-2f, 2f), ceilingVal);	//set new random position
 			rotateZ = 0f;
 			bone.transform.rotation = Quaternion.Euler (0, 0, rotateZ);	//reset rotation
 			gameObject.SetActive (false);	//deactivate game object for next tap
@@ -58,7 +60,8 @@ public class TreatTapSprite2 : MonoBehaviour {
 	void TreatPool(){	//object pool of treats
 		if ((Input.GetKeyDown (KeyCode.Space) || Input.GetMouseButtonDown (0)) && didTap) {	//use objects on each tap or spacebar
 			GameObject newTreat = theObjectPool.GetPooledObject ();	//acquire pooled object
-			newTreat.transform.position = initialPos;	//set game object's position
+			//newTreat.transform.position = new Vector2 (Random.Range(-2f, 2f), 4.535f);	//give new game object a random position
+				//commented out because every game object is given a random position in Start()
 			newTreat.SetActive (true);	//set game object to active for use
 		}
 	}
