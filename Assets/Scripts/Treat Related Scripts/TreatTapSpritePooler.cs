@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class TreatTapSpritePooler : MonoBehaviour {
 
-	public GameObject pooledObject;	//gameobject for used to pool objects
+	public GameObject pooledObject;	//gameobject used to pool objects
 
 	public int pooledAmount;	//initial number of pooled objects
 

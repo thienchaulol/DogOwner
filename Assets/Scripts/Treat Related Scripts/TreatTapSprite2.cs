@@ -48,10 +48,9 @@ public class TreatTapSprite2 : MonoBehaviour {
 		if (displayTime <= 0f) {
 			didTap = false;	//reset tap recorder
 			displayTime = resetDisplayTime;	//reset display time
-			bone.transform.position = initialPos;	//reset position
-			transform.position = initialPos;
+			transform.position = initialPos;	//reset position
 			rotateZ = 0f;
-			transform.rotation = Quaternion.Euler (0, 0, rotateZ);	//reset rotation
+			bone.transform.rotation = Quaternion.Euler (0, 0, rotateZ);	//reset rotation
 			gameObject.SetActive (false);	//deactivate game object for next tap
 		}
 	}
