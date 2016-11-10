@@ -7,7 +7,8 @@ public class DogTreatsMultiplier : MonoBehaviour {
 	public float costToUpgrade;	//cost to upgrade
 	public float newTreatsPerTap;	//new treats per tap after upgrade
 	public float numberOfUpgrades;	//number of upgrades
-	public UnityEngine.UI.Text disp;	//text display
+	public UnityEngine.UI.Text dispUpgradeCost;	//upgrade Cost text display
+	public UnityEngine.UI.Text dispNewTreatsPerTap; //new treats text display
 
 	void Update(){
 		if (numberOfUpgrades > 0) {
@@ -18,8 +19,8 @@ public class DogTreatsMultiplier : MonoBehaviour {
 			costToUpgrade = player.treatsPerTap * 15f;
 		}
 		newTreatsPerTap = Mathf.Round(player.treatsPerTap * 2.15f);	//treats per tap algorithm
-		disp.text = "Tap Upgrade cost: " + costToUpgrade + "\n" + "New Treats per tap: "	//text display
-			+ Mathf.Round(newTreatsPerTap * player.treatsMultiplier);
+		dispUpgradeCost.text = "Tap Upgrade cost: " + costToUpgrade + "\n";	//upgrade cost display
+		dispNewTreatsPerTap.text = "New Treats per tap: " + Mathf.Round(newTreatsPerTap * player.treatsMultiplier); //new treats cost display
 	}
 
 	public void Tapped(){
