@@ -24,13 +24,13 @@ public class BG1 : MonoBehaviour {
 
 	void display(){
 		if (numOfUpgrades == 0f) {	//display initial purchase price for background. numOfUpgrades == 1 for background
-			disp.text = BGName + "\n" + "Purchase price: " + purchasePrice;
+			disp.text = BGName + "\n" + "Purchase price: " + player.dispValToNiceString(purchasePrice);
 		}
 		else if (numOfUpgrades == 1f) {	//display purchase price for clothes. numOfUpgrades == 2 for clothes
-			disp.text = BGName + "\n" + "Buy clothes: " + purchasePrice;
+			disp.text = BGName + "\n" + "Buy clothes: " + player.dispValToNiceString(purchasePrice);
 		}
 		else if (numOfUpgrades == 2f) {	//display purchase price for hats. numOfUpgrades == 3 for hats
-			disp.text = BGName + "\n" + "Buy hats: " + purchasePrice;
+			disp.text = BGName + "\n" + "Buy hats: " + player.dispValToNiceString(purchasePrice);
 		}
 		else if (numOfUpgrades > 2f) {	//display reached max purchase, no more purchases available
 			disp.text = BGName + "\n" + "All accessories purchased!";

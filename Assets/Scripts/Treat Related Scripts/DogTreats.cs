@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+//using System; /*for Console.WriteLine()*/
+using System.Globalization; /*for CultureInfo.InvariantCulture*/
 
 public class DogTreats : MonoBehaviour {
 
@@ -34,10 +36,58 @@ public class DogTreats : MonoBehaviour {
 			dogTreat.gameObject.SetActive (true);	//for object pooling; sets game object(bone sprite) active when user taps
 			dogTreat.didTap = true;	//object pooling
 		}
-		totalTreatsDisp.text = Mathf.Round (totalTreats) + "\n";	//total treats display
-		treatsPerTapDisp.text = "Treats per tap: " + Mathf.Round(treatsPerTap * treatsMultiplier) + "\n";	//TPT display
-		treatsPerSecDisp.text = "Treats per second: " + Mathf.Round(playerTreatsPerSec * treatsMultiplier) + "\n";	//TPS display
-		treatsMultDisp.text = "Current treats multiplier: " + Mathf.Round(treatsMultiplier * 100) + "%\n";	//multiplier display
+		PlayerInfoDisplay ();
+	}
+
+	void PlayerInfoDisplay(){
+		//in hindsight, i could've made a function that took in a "UnityEngine.UI.Text" type
+		//and a "float" type that would do the four if statements instead of making four of them..
+		//i'll do that now.
+		//total treats display
+		dispVal(totalTreatsDisp, totalTreats);
+		//TPT display
+		treatsPerTapDisp.text = "Treats Per Tap: " + dispValToNiceString(treatsPerTap * treatsMultiplier);
+		//TPS display
+		treatsPerSecDisp.text = "Treats Per Sec: " + dispValToNiceString(playerTreatsPerSec * treatsMultiplier);
+		//multiplier display
+		treatsMultDisp.text = "Current Treats Multiplier: " + dispValToNiceString(treatsMultiplier * 100);
+	}
+
+	//http://stackoverflow.com/questions/11731996/string-format-numbers-thousands-123k-millions-123m-billions-123b
+	//https://en.wikipedia.org/wiki/Names_of_large_numbers
+	public void dispVal(UnityEngine.UI.Text x, float value){ //can only display a single value in given "Text" game object
+		if (value == 0) {
+			x.text = value.ToString();
+		}
+		if (value > 0 && value < 100000) {
+			x.text = value.ToString ("#,#", CultureInfo.InvariantCulture);
+		} else if (value >= 100000 && value < 1000000) {
+			x.text = value.ToString ("0,,#", CultureInfo.InvariantCulture);	//hundred thousand
+		} else if (value >= 1000000 && value < 1000000000) {
+			x.text = value.ToString ("0,,.#M", CultureInfo.InvariantCulture);	//million
+		} else if (value >= 1000000000 && value < 1000000000000) {
+			x.text = value.ToString ("0,,,.#B", CultureInfo.InvariantCulture);	//billion
+		} else if (value >= 1000000000000 && value < 1000000000000000) {
+			x.text = value.ToString ("0,,,,.#T", CultureInfo.InvariantCulture);	//trillion
+		}
+	}
+
+	public string dispValToNiceString(float value){	//returns "formatted" string of value up to trillion
+		if (value == 0) {
+			return value.ToString();
+		}
+		if (value > 0 && value < 100000) {
+			return value.ToString ("#,#", CultureInfo.InvariantCulture);	//thousand
+		} else if (value >= 100000 && value < 1000000) {
+			return value.ToString ("0,,#", CultureInfo.InvariantCulture);	//hundred thousand
+		} else if (value >= 1000000 && value < 1000000000) {
+			return value.ToString ("0,,.#M", CultureInfo.InvariantCulture);	//million
+		} else if (value >= 1000000000 && value < 1000000000000) {
+			return value.ToString ("0,,,.#B", CultureInfo.InvariantCulture);	//billion
+		} else if (value >= 1000000000000 && value < 1000000000000000) {
+			return value.ToString ("0,,,,.#T", CultureInfo.InvariantCulture);	//trillion
+		}
+		return value.ToString();
 	}
 
 	void treatIncreaseSec(){	//treat increase function

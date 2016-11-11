@@ -19,8 +19,9 @@ public class DogTreatsMultiplier : MonoBehaviour {
 			costToUpgrade = player.treatsPerTap * 15f;
 		}
 		newTreatsPerTap = Mathf.Round(player.treatsPerTap * 2.15f);	//treats per tap algorithm
-		dispUpgradeCost.text = "Tap Upgrade cost: " + costToUpgrade + "\n";	//upgrade cost display
-		dispNewTreatsPerTap.text = "New Treats per tap: " + Mathf.Round(newTreatsPerTap * player.treatsMultiplier); //new treats cost display
+		dispUpgradeCost.text = "Tap Upgrade cost: " + player.dispValToNiceString(costToUpgrade) + "\n";	//upgrade cost display
+		dispNewTreatsPerTap.text = "New Treats per tap: " + 
+			player.dispValToNiceString(newTreatsPerTap * player.treatsMultiplier); //new treats cost display
 	}
 
 	public void Tapped(){

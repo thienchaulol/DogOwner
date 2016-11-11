@@ -22,10 +22,12 @@ public class Dog1 : MonoBehaviour {
 		//display dog info on button
 		disp.text = "Dog: " + DogName + "\n" + "Price: " + purchasePrice + "\n";
 		if (numberOfUpgrades < 10) {
-			disp.text = "Treats/Sec: " + treatsPerSec + "\n" + "Dog: " + DogName + "\n" + "Upgrade: " + Mathf.Round(purchasePrice) + "\n";
+			disp.text = "Treats/Sec: " + player.dispValToNiceString(treatsPerSec) + "\n" + 
+				"Dog: " + DogName + "\n" + "Upgrade: " + player.dispValToNiceString(purchasePrice) + "\n";
 		}
 		if (numberOfUpgrades >= 10) {
-			disp.text = "Treats/Sec: " + treatsPerSec + "\n" + "Dog: " + DogName + "\n" + "Upgrades Maxed";
+			disp.text = "Treats/Sec: " + player.dispValToNiceString(treatsPerSec) + "\n" + 
+				"Dog: " + DogName + "\n" + "Upgrades Maxed";
 			maxed = true;
 		}
 	}
