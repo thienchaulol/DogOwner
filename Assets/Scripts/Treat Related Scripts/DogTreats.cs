@@ -26,6 +26,8 @@ public class DogTreats : MonoBehaviour {
 
 	public bool didTap = false;	//tap recorder
 
+	public cloudScript cloudSprite;
+
 	void Start(){
 		InvokeRepeating ("treatIncreaseSec", 1.0f, 1.0f);	//calls treat increase function every second
 	}
