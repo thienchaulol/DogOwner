@@ -3,32 +3,42 @@ using System.Collections;
 
 public class cloudScript : MonoBehaviour {
 
+	//public int canvasWidth;
 	public GameObject cloudSprite;
 	public DogTreats treats;
 	public Transform generationPoint;
 	public Transform endPoint;
 //	public TreatTapSpritePooler theObjectPool;
 	public float spriteSpeed;
-	public bool clicked = false;
+	public bool totalActiveClouds;
+	public int activeCloudsMax;
 
 	private Vector2 initialPos;
+	private float cloudWidth;
 	private bool atEnd = false;
 
 	// Use this for initialization
 	void Start () {
-		initialPos = cloudSprite.transform.position;
+		//canvasWidth = 338;
+		//activeCloudsMax = FindCloudsMax ();//calculate total number of clouds that can fit in screen
+		//Debug.Log("max clouds: " + activeCloudsMax);
+//		cloudWidth = cloudSprite.GetComponent<BoxCollider2D> ().size.x;	//calc cloud width
+		initialPos = cloudSprite.transform.position;	//store init pos
 	}
 	
 	// Update is called once per frame
 	void Update () {
-//		if (cloudSprite.transform.position.x >= generationPoint.position.x) {
-//			cloudPool ();	//get new cloud 
-//		}
+
 		Movement ();
 		if (atEnd == true) {	//refresh cloudsprite at end
 			RefreshGameObj ();
 		}
 	}
+
+//	int FindCloudsMax(){
+//		Debug.Log ("canvas width: " + canvasWidth + " cloudwidth: " + cloudWidth);
+//		return Mathf.RoundToInt(canvasWidth / 10);
+//	}
 
 	void Movement(){
 		//only move if the game object is active and if it's less than generation point
@@ -45,10 +55,6 @@ public class cloudScript : MonoBehaviour {
 		cloudSprite.transform.position = initialPos;	//refresh current cloud sprite
 		//cloudSprite.SetActive (false);	//deactivate cloud until needed
 		atEnd = false;
-	}	
-
-	void OnMouseDown(){
-		clicked = true;
 	}
 
 //	void cloudPool(){	//cloud object pool
