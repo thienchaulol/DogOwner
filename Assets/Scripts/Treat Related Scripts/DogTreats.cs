@@ -10,6 +10,7 @@ public class DogTreats : MonoBehaviour {
 							//set "Default" background if currentBG.numOfUpgrades < 1
 
 	public TreatTapSprite2 treatTapSprite;	//reference to treat tap sprite for object pooling
+	public cloudScript cloud;
 	public float totalTreats = 0f;	//total treats
 	public float treatsPerTap = 1f;	//treats per tap
 	public float playerTreatsPerSec = 0f;	//total treats per second
@@ -38,6 +39,9 @@ public class DogTreats : MonoBehaviour {
 			treatTapSprite.gameObject.SetActive (true);	//for object pooling; sets game object(bone sprite) active when user taps
 			treatTapSprite.didTap = true;	//object pooling
 		}
+	//	if (cloud.atEnd == true) {
+	//		cloud.gameObject.SetActive (true);
+	//	}
 		PlayerInfoDisplay ();
 	}
 
