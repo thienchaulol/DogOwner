@@ -9,7 +9,7 @@ public class DogTreats : MonoBehaviour {
 	//public BG1 currentBG;	//keeps track of current background. set "House Party" background when currentBG.numOfUpgrades >= 1
 							//set "Default" background if currentBG.numOfUpgrades < 1
 
-	public TreatTapSprite2 dogTreat;	//reference to treat tap sprite for object pooling
+	public TreatTapSprite2 treatTapSprite;	//reference to treat tap sprite for object pooling
 	public float totalTreats = 0f;	//total treats
 	public float treatsPerTap = 1f;	//treats per tap
 	public float playerTreatsPerSec = 0f;	//total treats per second
@@ -24,7 +24,7 @@ public class DogTreats : MonoBehaviour {
 	public UnityEngine.UI.Text treatsPerSecDisp;	//treats per sec display
 	public UnityEngine.UI.Text treatsMultDisp;	//treats multiplier display
 
-	bool didTap = false;	//tap recorder
+	public bool didTap = false;	//tap recorder
 
 	void Start(){
 		InvokeRepeating ("treatIncreaseSec", 1.0f, 1.0f);	//calls treat increase function every second
@@ -33,8 +33,8 @@ public class DogTreats : MonoBehaviour {
 	void Update(){
 		if (Input.GetKeyDown (KeyCode.Space) || Input.GetMouseButtonDown (0)) {	//records taps from user
 			didTap = true;	//record tap
-			dogTreat.gameObject.SetActive (true);	//for object pooling; sets game object(bone sprite) active when user taps
-			dogTreat.didTap = true;	//object pooling
+			treatTapSprite.gameObject.SetActive (true);	//for object pooling; sets game object(bone sprite) active when user taps
+			treatTapSprite.didTap = true;	//object pooling
 		}
 		PlayerInfoDisplay ();
 	}

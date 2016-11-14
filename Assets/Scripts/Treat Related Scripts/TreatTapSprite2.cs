@@ -61,7 +61,7 @@ public class TreatTapSprite2 : MonoBehaviour {
 		if ((Input.GetKeyDown (KeyCode.Space) || Input.GetMouseButtonDown (0)) && didTap) {	//use objects on each tap or spacebar
 			GameObject newTreat = theObjectPool.GetPooledObject ();	//acquire pooled object
 			//newTreat.transform.position = new Vector2 (Random.Range(-2f, 2f), 4.535f);	//give new game object a random position
-				//commented out because every game object is given a random position in Start()
+			//commented out because every game object is given a random position in Start()
 			newTreat.SetActive (true);	//set game object to active for use
 		}
 	}
