@@ -10,7 +10,6 @@ public class DogTreats : MonoBehaviour {
 							//set "Default" background if currentBG.numOfUpgrades < 1
 
 	public TreatTapSprite2 treatTapSprite;	//reference to treat tap sprite for object pooling
-	public cloudScript cloud;
 	public float totalTreats = 0f;	//total treats
 	public float treatsPerTap = 1f;	//treats per tap
 	public float playerTreatsPerSec = 0f;	//total treats per second
@@ -26,8 +25,6 @@ public class DogTreats : MonoBehaviour {
 	public UnityEngine.UI.Text treatsMultDisp;	//treats multiplier display
 
 	public bool didTap = false;	//tap recorder
-
-	public cloudScript cloudSprite;
 
 	void Start(){
 		InvokeRepeating ("treatIncreaseSec", 1.0f, 1.0f);	//calls treat increase function every second
