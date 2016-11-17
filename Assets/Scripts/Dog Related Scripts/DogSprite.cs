@@ -6,11 +6,15 @@ public class DogSprite : MonoBehaviour {
 	public Sprite dog, dogWithClothes, dogWithHat;	//sprite for dog type
 	public DogAura dogAura;	//dogAura object
 	public BG1 purchases; //BG1 object
-	public float spriteSpeed;	//jump speed when tapped
+	public float spriteJumpSpeed;	//jump speed when tapped
+	public float spriteWalkSpeed;	//walking speed
 	public float spriteJumpHeight;	//jump height when tapped
 	bool click = false;	//bool to check if tapped
 	public bool jumped = false;	//bool to check if is jumping
 	Vector2 initialPos;	//store initial position
+	Vector2 initialJumpPos; //position before jump
+	public Transform endPoint;
+	public bool atEnd = false;
 
 	void Start(){
 		//store initial position
@@ -31,20 +35,41 @@ public class DogSprite : MonoBehaviour {
 			}
 			if (click) {	//if dog is clicked on dog will jump
 				dogAura.enabled = false;	//disable dog aura when jumping
+				//Debug.Log ("initialJP: " + initialJumpPos + "counter: " + counter);
 				Jump ();
 				Fall ();
 				dogAura.enabled = true;		//enable dog aura when done jumping
+			}
+			if (!click) {
+				Movement ();
 			}
 		} else {	//don't display dog sprite if not purchased
 			this.gameObject.GetComponent<SpriteRenderer> ().sprite = null;
 		}
 	}
 
+	void Movement(){
+		//only move if the game object is active and if it's less than generation point
+		if (gameObject.activeSelf && transform.position.x > endPoint.position.x) {
+			transform.Translate (Vector2.left * spriteWalkSpeed * Time.deltaTime);	//move cloud right
+			if (transform.position.x <= endPoint.position.x) {
+				//if game object is equal to generation point, it is at the end
+				atEnd = true;
+				RefreshGameObj ();
+			}
+		}
+	}
+
+	void RefreshGameObj(){
+		transform.position = initialPos;	//refresh current sprite
+		atEnd = false;
+	}
+
 	//jumping function
 	void Jump(){
 		if (!jumped) {
-			transform.Translate (Vector2.up * spriteSpeed * Time.deltaTime);
-			if (transform.position.y > initialPos.y + spriteJumpHeight) {
+			transform.Translate (Vector2.up * spriteJumpSpeed * Time.deltaTime);
+			if (transform.position.y > initialJumpPos.y + spriteJumpHeight) {
 				jumped = true;
 				return;				
 			}
@@ -54,8 +79,8 @@ public class DogSprite : MonoBehaviour {
 	//falling function
 	void Fall(){
 		if (jumped) {
-			transform.Translate (Vector2.down * spriteSpeed * Time.deltaTime);
-			if (transform.position.y <= initialPos.y) {
+			transform.Translate (Vector2.down * spriteJumpSpeed * Time.deltaTime);
+			if (transform.position.y <= initialJumpPos.y) {
 				jumped = false;
 				click = false;
 				return;
@@ -67,6 +92,7 @@ public class DogSprite : MonoBehaviour {
 	void OnMouseDown(){
 		if (player.numberOfUpgrades > 0) {
 			//Debug.Log ("clicked");
+			initialJumpPos = transform.position;
 			click = true;
 		}
 	}
