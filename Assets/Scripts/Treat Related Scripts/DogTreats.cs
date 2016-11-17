@@ -53,7 +53,7 @@ public class DogTreats : MonoBehaviour {
 		//TPS display
 		treatsPerSecDisp.text = "Treats Per Sec: " + dispValToNiceString(playerTreatsPerSec * treatsMultiplier);
 		//multiplier display
-		treatsMultDisp.text = "Current Treats Multiplier: " + dispValToNiceString(treatsMultiplier * 100);
+		treatsMultDisp.text = "Treats Multiplier: " + dispValToNiceString(treatsMultiplier * 100) + "%";
 	}
 
 	//http://stackoverflow.com/questions/11731996/string-format-numbers-thousands-123k-millions-123m-billions-123b

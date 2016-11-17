@@ -4,7 +4,6 @@ using System.Collections;
 public class DogSprite : MonoBehaviour {
 	public Dog1 player;	//used as reference to dog game object
 	public Sprite dog, dogWithClothes, dogWithHat;	//sprite for dog type
-	public DogAura dogAura;	//dogAura object
 	public BG1 purchases; //BG1 object
 	public float spriteJumpSpeed;	//jump speed when tapped
 	public float spriteWalkSpeed;	//walking speed
@@ -34,11 +33,9 @@ public class DogSprite : MonoBehaviour {
 				this.gameObject.GetComponent<SpriteRenderer> ().sprite = dogWithHat;
 			}
 			if (click) {	//if dog is clicked on dog will jump
-				dogAura.enabled = false;	//disable dog aura when jumping
 				//Debug.Log ("initialJP: " + initialJumpPos + "counter: " + counter);
 				Jump ();
 				Fall ();
-				dogAura.enabled = true;		//enable dog aura when done jumping
 			}
 			if (!click) {
 				Movement ();
@@ -92,7 +89,9 @@ public class DogSprite : MonoBehaviour {
 	void OnMouseDown(){
 		if (player.numberOfUpgrades > 0) {
 			//Debug.Log ("clicked");
-			initialJumpPos = transform.position;
+			if (click == false) {
+				initialJumpPos = transform.position;
+			}
 			click = true;
 		}
 	}
