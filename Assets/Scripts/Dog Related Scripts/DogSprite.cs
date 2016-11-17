@@ -9,12 +9,12 @@ public class DogSprite : MonoBehaviour {
 	public float spriteJumpSpeed;	//jump speed when tapped
 	public float spriteWalkSpeed;	//walking speed
 	public float spriteJumpHeight;	//jump height when tapped
-	bool click = false;	//bool to check if tapped
-	public bool jumped = false;	//bool to check if is jumping
 	Vector2 initialPos;	//store initial position
 	Vector2 initialJumpPos; //position before jump
 	public Transform endPoint;
-	public bool atEnd = false;
+	public bool jumped = false;	//bool to check if is jumping
+	public bool atEnd = false; //bool to check if sprite is at end
+	bool click = false;	//bool to check if tapped
 
 	void Start(){
 		//store initial position
