@@ -21,9 +21,9 @@ public class TreatTapSprite2 : MonoBehaviour {
 	}
 
 	void Update () {
-		if (Input.GetKeyDown (KeyCode.Space) || Input.GetMouseButtonDown (0)) {	//record taps
-			didTap = true;
-		}
+		//if (Input.GetKeyDown (KeyCode.Space) || Input.GetMouseButtonDown (0)) {	//record taps
+		//	didTap = true;
+		//}
 		if(!gameObject.name.Contains("(Clone)")){	//prevents pooling of NULL object (prevents null reference exception)
 			TreatPool ();
 		}
