@@ -7,7 +7,7 @@ public class TreatTapSprite2 : MonoBehaviour {
 	public float displayTime;	//display time of game object
 	public float resetDisplayTime;	//reset display time of game object
 	public float spriteSpeed;	//speed of game object
-	public bool didTap = false;	//var to record taps
+	public bool didTap = false;
 	private Vector2 initialPos;	//initial position for moving game object (x, y)
 	float rotateZ;	//used to rotate object
 	public UnityEngine.GameObject bone;	//reference to bone sprite (gameobject)

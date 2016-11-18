@@ -14,10 +14,7 @@ public class DogTreats : MonoBehaviour {
 	public float treatsPerTap = 1f;	//treats per tap
 	public float playerTreatsPerSec = 0f;	//total treats per second
 	public float treatsMultiplier = 1f;	//treats multiplier
-
 	public bool showNotif = false;	//bool to show toy notification
-
-	//public UnityEngine.UI.Text disp;
 
 	public UnityEngine.UI.Text totalTreatsDisp;	//total treats display
 	public UnityEngine.UI.Text treatsPerTapDisp;	//treats per tap display
@@ -92,7 +89,7 @@ public class DogTreats : MonoBehaviour {
 	void OnMouseDown(){
 		totalTreats += Mathf.Round(treatsPerTap * treatsMultiplier);
 		treatTapSprite.gameObject.SetActive (true);	//for object pooling; sets game object(bone sprite) active when user taps
-		treatTapSprite.didTap = true;	//object pooling
+		treatTapSprite.didTap = true;
 		didTap = true;
 	}
 

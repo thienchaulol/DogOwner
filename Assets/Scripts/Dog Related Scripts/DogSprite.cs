@@ -11,8 +11,7 @@ public class DogSprite : MonoBehaviour {
 	Vector2 initialPos;	//store initial position
 	Vector2 initialJumpPos; //position before jump
 	public Transform endPoint;
-	public bool jumped = false;	//bool to check if is jumping
-	public bool atEnd = false; //bool to check if sprite is at end
+	public bool jumped = false; //bool to check if is jumping
 	bool click = false;	//bool to check if tapped
 
 	void Start(){
@@ -51,7 +50,6 @@ public class DogSprite : MonoBehaviour {
 			transform.Translate (Vector2.left * spriteWalkSpeed * Time.deltaTime);	//move cloud right
 			if (transform.position.x <= endPoint.position.x) {
 				//if game object is equal to generation point, it is at the end
-				atEnd = true;
 				RefreshGameObj ();
 			}
 		}
@@ -59,7 +57,6 @@ public class DogSprite : MonoBehaviour {
 
 	void RefreshGameObj(){
 		transform.position = initialPos;	//refresh current sprite
-		atEnd = false;
 	}
 
 	//jumping function

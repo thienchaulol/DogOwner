@@ -48,8 +48,9 @@
      <Compile Include="Assets\Scripts\Dog Related Scripts\Dog1.cs" />
      <Compile Include="Assets\Scripts\Dog Related Scripts\DogSprite.cs" />
      <Compile Include="Assets\Scripts\Old Scripts\DogAura.cs" />
+     <Compile Include="Assets\Scripts\Old Scripts\Toy1.cs" />
      <Compile Include="Assets\Scripts\Old Scripts\TreatTapSprite.cs" />
-     <Compile Include="Assets\Scripts\Toy Related Scripts\Toy1.cs" />
+     <Compile Include="Assets\Scripts\Toy Related Scripts\Toy2.cs" />
      <Compile Include="Assets\Scripts\Treat Related Scripts\DogTreats.cs" />
      <Compile Include="Assets\Scripts\Treat Related Scripts\DogTreatsMultiplier.cs" />
      <Compile Include="Assets\Scripts\Treat Related Scripts\TreatTapSprite2.cs" />
