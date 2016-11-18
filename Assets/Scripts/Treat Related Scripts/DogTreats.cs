@@ -31,14 +31,6 @@ public class DogTreats : MonoBehaviour {
 	}
 
 	void Update(){
-		if (Input.GetKeyDown (KeyCode.Space) || Input.GetMouseButtonDown (0)) {	//records taps from user
-			didTap = true;	//record tap
-			treatTapSprite.gameObject.SetActive (true);	//for object pooling; sets game object(bone sprite) active when user taps
-			treatTapSprite.didTap = true;	//object pooling
-		}
-	//	if (cloud.atEnd == true) {
-	//		cloud.gameObject.SetActive (true);
-	//	}
 		PlayerInfoDisplay ();
 	}
 
@@ -97,10 +89,14 @@ public class DogTreats : MonoBehaviour {
 		totalTreats += Mathf.Round(playerTreatsPerSec * treatsMultiplier);
 	}
 
-	void FixedUpdate(){
-		if (didTap == true) {	//treats per tap modifier
-			totalTreats += Mathf.Round(treatsPerTap * treatsMultiplier);
-			didTap = false;
-		}
+	void OnMouseDown(){
+		totalTreats += Mathf.Round(treatsPerTap * treatsMultiplier);
+		treatTapSprite.gameObject.SetActive (true);	//for object pooling; sets game object(bone sprite) active when user taps
+		treatTapSprite.didTap = true;	//object pooling
+		didTap = true;
+	}
+
+	void OnMouseUp(){
+		didTap = false;
 	}
 }

@@ -29,7 +29,7 @@ public class Toy1 : MonoBehaviour {
 			disp.text = "Toy: " + toyName + " \tLevel: " + numOfUpgrades + "\n" + "Receive chance every tap: " + toyChance * 100f + "%"
 				+ "\n" + "Increases all treat tap/accumulation by: " + treatMultFactor * 100f + "%" + "\n";
 		}
-		if (Input.GetKeyDown (KeyCode.Space) || Input.GetMouseButtonDown (0)) {	//records taps
+		if (player.didTap == true) {	//records taps
 			taps += 1;
 			didTap = true;
 		}
