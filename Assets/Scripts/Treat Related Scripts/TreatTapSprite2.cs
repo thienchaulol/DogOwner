@@ -34,7 +34,7 @@ public class TreatTapSprite2 : MonoBehaviour {
 
 	void Rotate(){
 		if (gameObject.activeSelf && displayTime > 0f) {
-			rotateZ += 20f;
+			rotateZ += 40f;
 			bone.transform.rotation = Quaternion.Euler (0, 0, rotateZ);	//set rotation
 		}
 	}
