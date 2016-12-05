@@ -9,19 +9,24 @@ public class DogTreats : MonoBehaviour {
 	//public BG1 currentBG;	//keeps track of current background. set "House Party" background when currentBG.numOfUpgrades >= 1
 							//set "Default" background if currentBG.numOfUpgrades < 1
 
-	public TreatTapSprite2 treatTapSprite;	//reference to treat tap sprite for object pooling
+	//Script variables
+	public TreatTapSprite2 treatTapSprite;	//reference to tap sprite. used to activate sprite
+
+	//Usual public variables
 	public float totalTreats = 0f;	//total treats
 	public float treatsPerTap = 1f;	//treats per tap
-	public float playerTreatsPerSec = 0f;	//total treats per second
 	public float treatsMultiplier = 1f;	//treats multiplier
+	public float playerTreatsPerSec = 0f; //total treats per second
 	public bool showNotif = false;	//bool to show toy notification
+	public bool didTap = false;	//tap recorder
 
+	//Display variables
 	public UnityEngine.UI.Text totalTreatsDisp;	//total treats display
 	public UnityEngine.UI.Text treatsPerTapDisp;	//treats per tap display
 	public UnityEngine.UI.Text treatsPerSecDisp;	//treats per sec display
 	public UnityEngine.UI.Text treatsMultDisp;	//treats multiplier display
 
-	public bool didTap = false;	//tap recorder
+	//GameObject variables
 
 	void Start(){
 		InvokeRepeating ("treatIncreaseSec", 1.0f, 1.0f);	//calls treat increase function every second
@@ -82,14 +87,13 @@ public class DogTreats : MonoBehaviour {
 		return value.ToString();
 	}
 
-	void treatIncreaseSec(){	//treat increase function
+	void treatIncreaseSec(){ //treat increase function
 		totalTreats += Mathf.Round(playerTreatsPerSec * treatsMultiplier);
 	}
 
 	void OnMouseDown(){
-		totalTreats += Mathf.Round(treatsPerTap * treatsMultiplier);
+		totalTreats += Mathf.Round(treatsPerTap * treatsMultiplier); //add treats
 		treatTapSprite.gameObject.SetActive (true);	//for object pooling; sets game object(bone sprite) active when user taps
-		treatTapSprite.didTap = true;
 		didTap = true;
 	}
 

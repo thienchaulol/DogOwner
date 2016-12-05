@@ -3,10 +3,15 @@ using System.Collections;
 
 public class DogTreatsMultiplier : MonoBehaviour {
 
+	//Script variables
 	public DogTreats player;	//reference to the player
+
+	//Usual variables
 	public float costToUpgrade;	//cost to upgrade
 	public float newTreatsPerTap;	//new treats per tap after upgrade
 	public float numberOfUpgrades;	//number of upgrades
+
+	//Display variables
 	public UnityEngine.UI.Text dispUpgradeCost;	//upgrade Cost text display
 	//public UnityEngine.UI.Text dispNewTreatsPerTap; //new treats text display
 

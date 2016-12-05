@@ -2,32 +2,42 @@
 using System.Collections;
 
 public class TreatTapSprite2 : MonoBehaviour {
-	
+
+	//Script variables
 	public TreatTapSpritePooler theObjectPool;	//reference to object pool script
+
+	//Usual public variables
 	public float displayTime;	//display time of game object
 	public float resetDisplayTime;	//reset display time of game object
 	public float spriteSpeed;	//speed of game object
-	public bool didTap = false;
-	private Vector2 initialPos;	//initial position for moving game object (x, y)
-	float rotateZ;	//used to rotate object
-	public UnityEngine.GameObject bone;	//reference to bone sprite (gameobject)
 	public float ceilingVal;	//height to drop bone from
+	private Vector2 initialPos;	//initial position for moving game object (x, y)
+
+	//Usual not-public variables
+	float rotateZ;	//used to rotate object
+
+	//Display variables
+
+	//GameObject variables
+	public UnityEngine.GameObject bone;	//reference to bone sprite (gameobject)
 
 	void Start(){
 		initialPos = new Vector2 (Random.Range(-2f, 2f), ceilingVal);	//set initial(random) position of game object
-		gameObject.transform.position = initialPos;
-		gameObject.SetActive (false);	//deactivate game object until tap
-		InvokeRepeating("Rotate", 0.1f, 0.1f);	//rotate every second=
+		gameObject.transform.position = initialPos; //store initial position of game object
+		gameObject.SetActive (false);	//deactivate game object until OnMouseDown()
+				//**This script as well as DogTreats.cs both keep track of the user taps
+				//TODO:**Could possibly put this into DogTreats.cs to reduce overhead of keeping track of taps.
+					//can't do that because DogTreats.cs re-activates the gameObject this script is attached to.
+		InvokeRepeating("Rotate", 0.1f, 0.1f);	//rotate every second
 	}
 
 	void Update () {
-		//if (Input.GetKeyDown (KeyCode.Space) || Input.GetMouseButtonDown (0)) {	//record taps
-		//	didTap = true;
-		//}
-		if(!gameObject.name.Contains("(Clone)")){	//prevents pooling of NULL object (prevents null reference exception)
+		if(gameObject.name.Equals("boneParent") && !gameObject.activeSelf){	//cloned objects cannot clone themselves
+			//BUG: sometimes TWO sprites appear on tap.
+			//Call TreatPool() only when the parent bone is active.
 			TreatPool ();
 		}
-		Movement ();	//move object
+		Movement (); //move object
 		displayTime -= Time.deltaTime;	//display object for set time
 		RefreshGameObj ();	//refresh game object for next tap
 	}
@@ -48,7 +58,6 @@ public class TreatTapSprite2 : MonoBehaviour {
 
 	void RefreshGameObj(){
 		if (displayTime <= 0f) {
-			didTap = false;	//reset tap recorder
 			displayTime = resetDisplayTime;	//reset display time
 			transform.position = new Vector2 (Random.Range(-2f, 2f), ceilingVal);	//set new random position
 			rotateZ = 0f;
@@ -58,10 +67,9 @@ public class TreatTapSprite2 : MonoBehaviour {
 	}
 
 	void TreatPool(){	//object pool of treats
-		if ((Input.GetKeyDown (KeyCode.Space) || Input.GetMouseButtonDown (0)) && didTap) {	//use objects on each tap or spacebar
+		if (Input.GetMouseButtonDown(0)) {	//use objects on each tap or spacebar
+			Debug.Log("TreatPool() entered");
 			GameObject newTreat = theObjectPool.GetPooledObject ();	//acquire pooled object
-			//newTreat.transform.position = new Vector2 (Random.Range(-2f, 2f), 4.535f);	//give new game object a random position
-			//commented out because every game object is given a random position in Start()
 			newTreat.SetActive (true);	//set game object to active for use
 		}
 	}
