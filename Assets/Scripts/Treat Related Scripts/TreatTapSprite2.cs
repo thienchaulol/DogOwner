@@ -4,6 +4,7 @@ using System.Collections;
 public class TreatTapSprite2 : MonoBehaviour {
 
 	//Script variables
+	public DogTreats player;
 	public TreatTapSpritePooler theObjectPool;	//reference to object pool script
 
 	//Usual public variables
@@ -32,9 +33,8 @@ public class TreatTapSprite2 : MonoBehaviour {
 	}
 
 	void Update () {
-		if(gameObject.name.Equals("boneParent") && !gameObject.activeSelf){	//cloned objects cannot clone themselves
+		if(Input.GetMouseButtonDown(0) && !gameObject.name.Contains("(Clone)")){	//cloned objects cannot clone themselves
 			//BUG: sometimes TWO sprites appear on tap.
-			//Call TreatPool() only when the parent bone is active.
 			TreatPool ();
 		}
 		Movement (); //move object
@@ -67,10 +67,7 @@ public class TreatTapSprite2 : MonoBehaviour {
 	}
 
 	void TreatPool(){	//object pool of treats
-		if (Input.GetMouseButtonDown(0)) {	//use objects on each tap or spacebar
-			Debug.Log("TreatPool() entered");
-			GameObject newTreat = theObjectPool.GetPooledObject ();	//acquire pooled object
-			newTreat.SetActive (true);	//set game object to active for use
-		}
+		GameObject newTreat = theObjectPool.GetPooledObject ();	//acquire pooled object
+		newTreat.SetActive (true);	//set game object to active for use
 	}
 }
