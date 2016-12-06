@@ -36,6 +36,7 @@ public class BigBone : MonoBehaviour {
 		transform.position = new Vector2 (Random.Range(-1.7f, 1.756f), ceilingVal);	//set new random position
 		spawned = false;
 		notMoving = false;
+		player.bigBoneCounter = 0; //reset pity timer if a bigbone is retrieved
 		gameObject.SetActive (false);	//deactivate game object for next tap
 	}
 

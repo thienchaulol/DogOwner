@@ -20,6 +20,7 @@ public class DogTreats : MonoBehaviour {
 	public float playerTreatsPerSec = 0f; //total treats per second
 	public bool showNotif = false;	//bool to show toy notification
 	public bool didTap = false;	//tap recorder
+	public int bigBoneCounter;
 	int receive;
 	int receive2;
 
@@ -99,6 +100,7 @@ public class DogTreats : MonoBehaviour {
 	}
 
 	void OnMouseDown(){
+		bigBoneCounter++;
 		totalTreats += Mathf.Round(treatsPerTap * treatsMultiplier); //add treats
 		treatTapSprite.gameObject.SetActive (true);	//for object pooling; sets game object(bone sprite) active when user taps
 		RollForBigBone();
@@ -109,6 +111,9 @@ public class DogTreats : MonoBehaviour {
 		receive = Random.Range(0, (int)treatsPerTap*23);
 		receive2 = Random.Range (0, (int)treatsPerTap*23);
 		if (receive == receive2) {
+			bigBone.gameObject.SetActive (true);
+			bigBone.SpawnBigBone ();
+		} else if (bigBoneCounter >= 2000) { //receive big bone every 2000 taps
 			bigBone.gameObject.SetActive (true);
 			bigBone.SpawnBigBone ();
 		}
