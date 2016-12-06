@@ -11,6 +11,7 @@ public class DogTreats : MonoBehaviour {
 
 	//Script variables
 	public TreatTapSprite2 treatTapSprite;	//reference to tap sprite. used to activate sprite
+	public BigBone bigBone;
 
 	//Usual public variables
 	public float totalTreats = 0f;	//total treats
@@ -19,6 +20,8 @@ public class DogTreats : MonoBehaviour {
 	public float playerTreatsPerSec = 0f; //total treats per second
 	public bool showNotif = false;	//bool to show toy notification
 	public bool didTap = false;	//tap recorder
+	int receive;
+	int receive2;
 
 	//Display variables
 	public UnityEngine.UI.Text totalTreatsDisp;	//total treats display
@@ -91,13 +94,24 @@ public class DogTreats : MonoBehaviour {
 		totalTreats += Mathf.Round(playerTreatsPerSec * treatsMultiplier);
 	}
 
-	void OnMouseDown(){
-		totalTreats += Mathf.Round(treatsPerTap * treatsMultiplier); //add treats
-		treatTapSprite.gameObject.SetActive (true);	//for object pooling; sets game object(bone sprite) active when user taps
-		didTap = true;
-	}
-
 	void OnMouseUp(){
 		didTap = false;
 	}
+
+	void OnMouseDown(){
+		totalTreats += Mathf.Round(treatsPerTap * treatsMultiplier); //add treats
+		treatTapSprite.gameObject.SetActive (true);	//for object pooling; sets game object(bone sprite) active when user taps
+		RollForBigBone();
+		didTap = true;
+	}
+
+	void RollForBigBone(){
+		receive = Random.Range(0, (int)treatsPerTap*23);
+		receive2 = Random.Range (0, (int)treatsPerTap*23);
+		if (receive == receive2) {
+			bigBone.gameObject.SetActive (true);
+			bigBone.SpawnBigBone ();
+		}
+	}
+
 }

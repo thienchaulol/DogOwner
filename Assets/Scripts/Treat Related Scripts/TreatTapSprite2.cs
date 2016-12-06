@@ -26,9 +26,9 @@ public class TreatTapSprite2 : MonoBehaviour {
 		initialPos = new Vector2 (Random.Range(-2f, 2f), ceilingVal);	//set initial(random) position of game object
 		gameObject.transform.position = initialPos; //store initial position of game object
 		gameObject.SetActive (false);	//deactivate game object until OnMouseDown()
-				//**This script as well as DogTreats.cs both keep track of the user taps
-				//TODO:**Could possibly put this into DogTreats.cs to reduce overhead of keeping track of taps.
-					//can't do that because DogTreats.cs re-activates the gameObject this script is attached to.
+		//**This script as well as DogTreats.cs both keep track of the user taps
+		//TODO:**Could possibly put this into DogTreats.cs to reduce overhead of keeping track of taps.
+		//can't do that because DogTreats.cs re-activates the gameObject this script is attached to.
 		InvokeRepeating("Rotate", 0.1f, 0.1f);	//rotate every second
 	}
 
@@ -59,7 +59,7 @@ public class TreatTapSprite2 : MonoBehaviour {
 	void RefreshGameObj(){
 		if (displayTime <= 0f) {
 			displayTime = resetDisplayTime;	//reset display time
-			transform.position = new Vector2 (Random.Range(-2f, 2f), ceilingVal);	//set new random position
+			transform.position = initialPos;	//set new random position
 			rotateZ = 0f;
 			bone.transform.rotation = Quaternion.Euler (0, 0, rotateZ);	//reset rotation
 			gameObject.SetActive (false);	//deactivate game object for next tap

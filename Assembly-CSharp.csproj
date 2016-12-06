@@ -51,6 +51,7 @@
      <Compile Include="Assets\Scripts\Old Scripts\Toy1.cs" />
      <Compile Include="Assets\Scripts\Old Scripts\TreatTapSprite.cs" />
      <Compile Include="Assets\Scripts\Toy Related Scripts\Toy2.cs" />
+     <Compile Include="Assets\Scripts\Treat Related Scripts\BigBone.cs" />
      <Compile Include="Assets\Scripts\Treat Related Scripts\DogTreats.cs" />
      <Compile Include="Assets\Scripts\Treat Related Scripts\DogTreatsMultiplier.cs" />
      <Compile Include="Assets\Scripts\Treat Related Scripts\TreatTapSprite2.cs" />
