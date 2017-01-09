@@ -10,7 +10,7 @@ public class DogTreatsMultiplier : MonoBehaviour {
 	public float costToUpgrade;	//cost to upgrade
 	public float newTreatsPerTap;	//new treats per tap after upgrade
 	public float numberOfUpgrades;	//number of upgrades
-
+	bool canUpgrade = true;
 	//Display variables
 	public UnityEngine.UI.Text dispUpgradeCost;	//upgrade Cost text display
 	//public UnityEngine.UI.Text dispNewTreatsPerTap; //new treats text display
@@ -30,12 +30,20 @@ public class DogTreatsMultiplier : MonoBehaviour {
 	}
 
 	public void Tapped(){
-		//if(Input.GetMouseButtonDown(0))
-		if (player.totalTreats >= costToUpgrade) {	//check if enough treats to upgrade
+		if (player.totalTreats >= costToUpgrade && canUpgrade) {	//check if enough treats to upgrade
 			numberOfUpgrades += 1f;	//increase number of upgrades
 			player.totalTreats -= costToUpgrade;	//subtract cost from total treats
 			player.treatsPerTap = newTreatsPerTap;	//set new treats per tap
 			costToUpgrade = Mathf.Round(costToUpgrade*1.15f);	//increase upgrade cost
+			transform.localScale = new Vector3(0.9f, 0.9f, 0.9f); //resize button when pressed
+			StartCoroutine(ResizeButton (0.15f)); //resize button after short delay
 		}
+	}
+
+	IEnumerator ResizeButton(float waitDelay){
+		canUpgrade = false;
+		yield return new WaitForSeconds (waitDelay);
+		transform.localScale = new Vector3 (1, 1, 1);
+		canUpgrade = true;
 	}
 }

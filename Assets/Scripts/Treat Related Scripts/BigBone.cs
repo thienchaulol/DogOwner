@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(AudioSource))]
 public class BigBone : MonoBehaviour {
 	//AHH! This script does almost the same thing as TreatTapSprite2.cs
 	//Can't figure out how to make the Big Bone work inside there ;_;
