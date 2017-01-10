@@ -23,9 +23,11 @@ public class TreatTapSprite2 : MonoBehaviour {
 	public UnityEngine.GameObject bone;	//reference to bone sprite (gameobject)
 
 	void Start(){
+		//every clone will have the same "random" position it's given at the beginning
+		//move initialPos to RefreshGameObj() as well
 		initialPos = new Vector2 (Random.Range(-2f, 2f), ceilingVal);	//set initial(random) position of game object
 		gameObject.transform.position = initialPos; //store initial position of game object
-		gameObject.SetActive (false);	//deactivate game object until OnMouseDown()
+		//gameObject.SetActive (false);	//deactivate game object until OnMouseDown()
 		//**This script as well as DogTreats.cs both keep track of the user taps
 		//TODO:**Could possibly put this into DogTreats.cs to reduce overhead of keeping track of taps.
 		//can't do that because DogTreats.cs re-activates the gameObject this script is attached to.
@@ -33,10 +35,10 @@ public class TreatTapSprite2 : MonoBehaviour {
 	}
 
 	void Update () {
-		if(Input.GetMouseButtonDown(0) && !gameObject.name.Contains("(Clone)")){	//cloned objects cannot clone themselves
+		//if(Input.GetMouseButtonDown(0) && !gameObject.name.Contains("(Clone)")){	//cloned objects cannot clone themselves
 			//BUG: sometimes TWO sprites appear on tap.
-			TreatPool ();
-		}
+		//	TreatPool ();
+		//}
 		Movement (); //move object
 		displayTime -= Time.deltaTime;	//display object for set time
 		RefreshGameObj ();	//refresh game object for next tap
@@ -59,6 +61,7 @@ public class TreatTapSprite2 : MonoBehaviour {
 	void RefreshGameObj(){
 		if (displayTime <= 0f) {
 			displayTime = resetDisplayTime;	//reset display time
+			initialPos = new Vector2 (Random.Range(-2f, 2f), ceilingVal); //set new random initial position
 			transform.position = initialPos;	//set new random position
 			rotateZ = 0f;
 			bone.transform.rotation = Quaternion.Euler (0, 0, rotateZ);	//reset rotation
@@ -66,7 +69,7 @@ public class TreatTapSprite2 : MonoBehaviour {
 		}
 	}
 
-	void TreatPool(){	//object pool of treats
+	public void TreatPool(){	//object pool of treats
 		GameObject newTreat = theObjectPool.GetPooledObject ();	//acquire pooled object
 		newTreat.SetActive (true);	//set game object to active for use
 	}

@@ -34,6 +34,7 @@ public class DogTreats : MonoBehaviour {
 
 	void Start(){
 		InvokeRepeating ("treatIncreaseSec", 1.0f, 1.0f);	//calls treat increase function every second
+		treatTapSprite.gameObject.SetActive(false); //deactivate bone sprite until tap
 	}
 
 	void Update(){
@@ -102,7 +103,11 @@ public class DogTreats : MonoBehaviour {
 	void OnMouseDown(){
 		bigBoneCounter++;
 		totalTreats += Mathf.Round(treatsPerTap * treatsMultiplier); //add treats
-		treatTapSprite.gameObject.SetActive (true);	//for object pooling; sets game object(bone sprite) active when user taps
+		if (!treatTapSprite.gameObject.activeSelf) {
+			treatTapSprite.gameObject.SetActive (true);	//for object pooling; sets game object(bone sprite) active when user taps
+		} else {
+			treatTapSprite.TreatPool ();
+		}
 		RollForBigBone();
 		didTap = true;
 	}
