@@ -4,7 +4,7 @@ using System.Collections;
 public class TreatTapSprite2 : MonoBehaviour {
 
 	//Script variables
-	public DogTreats player;
+	//public DogTreats player;
 	public TreatTapSpritePooler theObjectPool;	//reference to object pool script
 
 	//Usual public variables
@@ -21,6 +21,24 @@ public class TreatTapSprite2 : MonoBehaviour {
 
 	//GameObject variables
 	public UnityEngine.GameObject bone;	//reference to bone sprite (gameobject)
+
+	AudioSource[] aSources;
+	AudioSource audioSource1;
+
+	void Awake(){	//putting this portion of code in Awake() instead of Start() prevents null reference exception
+				 	//because otherwise audioSource1 will reference the disabled varibale, aSources, when audioSource1
+					//is called in OnEnable(). This is occurs because aSources is nothing when "gameObject.SetActive(false)" is called
+					//in RefreshGameObj()
+		//AudioSource type array of AudioSource components attached to gameObject
+		aSources = GetComponents <AudioSource>();
+		//**To randomize sounds, could have one AudioSource object that is randomly initialized to
+		//**one of the elements in the AudioSource array, aSources, on every tap.
+		audioSource1 = aSources[Random.Range(0,4)];
+	}
+
+	void OnEnable(){ //this function is called when an object becomes enabled and active
+		audioSource1.Play ();
+	}
 
 	void Start(){
 		//every clone will have the same "random" position it's given at the beginning
@@ -63,6 +81,7 @@ public class TreatTapSprite2 : MonoBehaviour {
 			displayTime = resetDisplayTime;	//reset display time
 			initialPos = new Vector2 (Random.Range(-2f, 2f), ceilingVal); //set new random initial position
 			transform.position = initialPos;	//set new random position
+			audioSource1 = aSources[Random.Range(0,4)]; //set new random dog sound
 			rotateZ = 0f;
 			bone.transform.rotation = Quaternion.Euler (0, 0, rotateZ);	//reset rotation
 			gameObject.SetActive (false);	//deactivate game object for next tap

@@ -15,6 +15,27 @@ public class BigBone : MonoBehaviour {
 	public float spriteSpeed;	//speed of game object
 	public float ceilingVal;	//height to drop bone from
 
+	AudioSource[] aSources;
+	AudioSource audioSource1;
+		//wanted it to be public so it can be played in DogTreats.cs so the sound isn't cut off when the bone is claimed
+		//**a sound managing script would be nice so objects that can be claimed before the end of it's sound clip is played won't
+		//**be cut off prematurely.
+
+	void Awake(){	//putting this portion of code in Awake() instead of Start() prevents null reference exception
+		//because otherwise audioSource1 will reference the disabled varibale, aSources, when audioSource1
+		//is called in OnEnable(). This is occurs because aSources is nothing when "gameObject.SetActive(false)" is called
+		//in RefreshGameObj()
+		//AudioSource type array of AudioSource components attached to gameObject
+		aSources = GetComponents <AudioSource>();
+		//**To randomize sounds, could have one AudioSource object that is randomly initialized to
+		//**one of the elements in the AudioSource array, aSources, on every tap.
+		audioSource1 = aSources[Random.Range(0,3)];
+	}
+
+	void OnEnable(){ //this function is called when an object becomes enabled and active
+		audioSource1.Play ();
+	}
+
 	// Use this for initialization
 	void Start () {
 		gameObject.SetActive (false);
