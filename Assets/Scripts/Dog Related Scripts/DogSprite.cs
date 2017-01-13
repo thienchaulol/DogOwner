@@ -56,7 +56,8 @@ public class DogSprite : MonoBehaviour {
 	}
 
 	void RefreshGameObj(){
-		transform.position = initialPos;	//refresh current sprite
+		Vector2 temp = new Vector2 (initialPos.x, Random.Range(initialPos.y - 1f,initialPos.y + 1f));
+		transform.position = temp;	//refresh current sprite
 	}
 
 	//jumping function
