@@ -6,8 +6,6 @@ using System.Globalization; /*for CultureInfo.InvariantCulture*/
 public class DogTreats : MonoBehaviour {
 
 	//MAIN CANVAS SCRIPT
-	//public BG1 currentBG;	//keeps track of current background. set "House Party" background when currentBG.numOfUpgrades >= 1
-							//set "Default" background if currentBG.numOfUpgrades < 1
 
 	//Script variables
 	public TreatTapSprite2 treatTapSprite;	//reference to tap sprite. used to activate sprite

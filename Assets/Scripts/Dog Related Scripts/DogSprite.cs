@@ -3,7 +3,7 @@ using System.Collections;
 
 public class DogSprite : MonoBehaviour {
 	public Dog1 player;	//used as reference to dog game object
-	public Sprite dog, dogWithClothes, dogWithHat;	//sprite for dog type
+	public Sprite dog, dogWithClothes, dogWithHat, dogWithShoes;	//sprite for dog type
 	public BG1 purchases; //BG1 object
 	public float spriteJumpSpeed;	//jump speed when tapped
 	public float spriteWalkSpeed;	//walking speed
@@ -26,6 +26,9 @@ public class DogSprite : MonoBehaviour {
 		if (player.numberOfUpgrades > 0f) {	//display dog sprite when dog is purchased
 			if (purchases.numOfUpgrades == 0) {	//no purchases in BG tab, default dog
 				this.gameObject.GetComponent<SpriteRenderer> ().sprite = dog;
+				//first purchase will only change the background
+			} else if(purchases.numOfUpgrades == 1) {
+				this.gameObject.GetComponent<SpriteRenderer> ().sprite = dogWithShoes;
 			} else if (purchases.numOfUpgrades == 2) { //2 purchases = clothes for dog
 				this.gameObject.GetComponent<SpriteRenderer> ().sprite = dogWithClothes;
 			} else if (purchases.numOfUpgrades == 3) { //3 purchases = hat for dog

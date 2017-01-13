@@ -8,10 +8,13 @@ public class BG1 : MonoBehaviour {
 	public UnityEngine.UI.Text disp;	//button display
 	public float numOfUpgrades = 0f;	//number of upgrades
 	public float purchasePrice;	//purchase price
+	//public Sprite BG;
 	
 	// Update is called once per frame
 	void Update () {
 		display ();	//display background info
+		if (numOfUpgrades == 1) { //change background; upgrades 2 and 3 are handled in DogSprite.cs
+		}
 	}
 
 	public void Purchased(){
@@ -24,7 +27,7 @@ public class BG1 : MonoBehaviour {
 
 	void display(){
 		if (numOfUpgrades == 0f) {	//display initial purchase price for background. numOfUpgrades == 1 for background
-			disp.text = BGName + "\n" + "Purchase price: " + player.dispValToNiceString(purchasePrice);
+			disp.text = BGName + "\n" + "Buy shoes: " + player.dispValToNiceString(purchasePrice);
 		}
 		else if (numOfUpgrades == 1f) {	//display purchase price for clothes. numOfUpgrades == 2 for clothes
 			disp.text = BGName + "\n" + "Buy clothes: " + player.dispValToNiceString(purchasePrice);
