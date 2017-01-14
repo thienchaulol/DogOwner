@@ -3,8 +3,6 @@ using System.Collections;
 
 [RequireComponent(typeof(AudioSource))]
 public class BigBone : MonoBehaviour {
-	//AHH! This script does almost the same thing as TreatTapSprite2.cs
-	//Can't figure out how to make the Big Bone work inside there ;_;
 
 	public DogTreats player;
 	public Transform endpoint;
@@ -33,8 +31,9 @@ public class BigBone : MonoBehaviour {
 	}
 
 	void OnEnable(){ //this function is called when an object becomes enabled and active
-		audioSource1 = aSources[Random.Range(0,2)];
+		audioSource1 = aSources[Random.Range(0,3)];
 		audioSource1.Play ();
+		StartCoroutine (AudioFadeOut.FadeOut (audioSource1, audioSource1.clip.length));
 	}
 
 	// Use this for initialization
@@ -48,6 +47,21 @@ public class BigBone : MonoBehaviour {
 			Movement (); //move object
 		} else {
 			notMoving = true;
+		}
+	}
+
+	//Audio Fade Out
+	//https://forum.unity3d.com/threads/fade-out-audio-source.335031/
+	public static class AudioFadeOut {
+		public static IEnumerator FadeOut (AudioSource audioSource, float FadeTime) {
+			float startVolume = audioSource.volume;
+			while (audioSource.volume > 0) {
+				audioSource.volume -= startVolume * Time.deltaTime / FadeTime;
+
+				yield return null;
+			}
+			audioSource.Stop ();
+			audioSource.volume = startVolume;
 		}
 	}
 
