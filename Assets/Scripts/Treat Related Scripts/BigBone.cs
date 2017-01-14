@@ -29,10 +29,11 @@ public class BigBone : MonoBehaviour {
 		aSources = GetComponents <AudioSource>();
 		//**To randomize sounds, could have one AudioSource object that is randomly initialized to
 		//**one of the elements in the AudioSource array, aSources, on every tap.
-		audioSource1 = aSources[Random.Range(0,3)];
+		//audioSource1 = aSources[Random.Range(0,2)];
 	}
 
 	void OnEnable(){ //this function is called when an object becomes enabled and active
+		audioSource1 = aSources[Random.Range(0,2)];
 		audioSource1.Play ();
 	}
 
@@ -67,7 +68,7 @@ public class BigBone : MonoBehaviour {
 	}
 
 	void OnMouseDown(){
-		if (notMoving) {
+		if (notMoving && !audioSource1.isPlaying) {
 			player.totalTreats += player.totalTreats + player.treatsPerTap * 100;
 			Refresh ();
 		}

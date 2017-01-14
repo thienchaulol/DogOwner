@@ -111,8 +111,8 @@ public class DogTreats : MonoBehaviour {
 	}
 
 	void RollForBigBone(){
-		receive = Random.Range(0, 20); //1 in 5000 chance to receive a big bone
-		receive2 = Random.Range (0, 20);
+		receive = Random.Range(0, 0); //1 in 5000 chance to receive a big bone
+		receive2 = Random.Range (0, 0);
 		if (receive == receive2) {
 			bigBone.gameObject.SetActive (true);
 			bigBone.SpawnBigBone ();

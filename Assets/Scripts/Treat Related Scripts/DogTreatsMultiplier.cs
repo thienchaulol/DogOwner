@@ -15,6 +15,8 @@ public class DogTreatsMultiplier : MonoBehaviour {
 	public UnityEngine.UI.Text dispUpgradeCost;	//upgrade Cost text display
 	//public UnityEngine.UI.Text dispNewTreatsPerTap; //new treats text display
 
+	AudioSource audioSource1;
+
 	void Update(){
 		if (numberOfUpgrades > 0) {
 			//increase upgrade cost based on treats per tap and number of upgrades
@@ -31,6 +33,8 @@ public class DogTreatsMultiplier : MonoBehaviour {
 
 	public void Tapped(){
 		if (player.totalTreats >= costToUpgrade && canUpgrade) {	//check if enough treats to upgrade
+			audioSource1 = GetComponent<AudioSource>();
+			audioSource1.Play();
 			numberOfUpgrades += 1f;	//increase number of upgrades
 			player.totalTreats -= costToUpgrade;	//subtract cost from total treats
 			player.treatsPerTap = newTreatsPerTap;	//set new treats per tap

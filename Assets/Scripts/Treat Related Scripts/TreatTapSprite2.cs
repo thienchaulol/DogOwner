@@ -33,7 +33,7 @@ public class TreatTapSprite2 : MonoBehaviour {
 		aSources = GetComponents <AudioSource>();
 		//**To randomize sounds, could have one AudioSource object that is randomly initialized to
 		//**one of the elements in the AudioSource array, aSources, on every tap.
-		audioSource1 = aSources[Random.Range(0,4)];
+		audioSource1 = aSources[Random.Range(0,14)];
 	}
 
 	void OnEnable(){ //this function is called when an object becomes enabled and active
