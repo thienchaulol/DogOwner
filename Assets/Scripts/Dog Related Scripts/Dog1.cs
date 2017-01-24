@@ -13,21 +13,26 @@ public class Dog1 : MonoBehaviour {
 	public float purchasePrice;	//purchase price and upgrade price
 	public float numberOfUpgrades;	//total number of upgrades
 	public DogTreats player;	//used to reference player
-	public UnityEngine.UI.Text disp;	//button display
+	public UnityEngine.UI.Text nameDisp;	//button display
+	public UnityEngine.UI.Text infoDisp;
+	public UnityEngine.UI.Text info2Disp;
 	float treatsPerSec;	//current treats per second from dog
 	float newTreatsPerSec;	//new treats per second after upgrade
 	bool maxed = false;	//can only upgrade dog 10 times
 
 	void Update () {
 		//display dog info on button
-		disp.text = "Dog: " + DogName + "\n" + "Price: " + purchasePrice + "\n";
+		nameDisp.text = DogName;
+		infoDisp.text = "Price: " + purchasePrice + "\n";
 		if (numberOfUpgrades < 10) {
-			disp.text = "Treats/Sec: " + player.dispValToNiceString(treatsPerSec) + "\n" + 
-				"Dog: " + DogName + "\n" + "Upgrade: " + player.dispValToNiceString(purchasePrice) + "\n";
+			nameDisp.text = DogName;
+			infoDisp.text = "Treats/Sec: " + player.dispValToNiceString (treatsPerSec);
+			info2Disp.text = "Upgrade: " + player.dispValToNiceString(purchasePrice);
 		}
 		if (numberOfUpgrades >= 10) {
-			disp.text = "Treats/Sec: " + player.dispValToNiceString(treatsPerSec) + "\n" + 
-				"Dog: " + DogName + "\n" + "Upgrades Maxed";
+			nameDisp.text = DogName;
+			infoDisp.text = "Treats/Sec: " + player.dispValToNiceString (treatsPerSec);
+			info2Disp.text = "Upgrade: " + player.dispValToNiceString(purchasePrice);
 			maxed = true;
 		}
 	}

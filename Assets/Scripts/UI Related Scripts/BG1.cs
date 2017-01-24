@@ -5,7 +5,8 @@ public class BG1 : MonoBehaviour {
 
 	public DogTreats player;	//reference to player to calculate total treats
 	public string BGName;	//background name
-	public UnityEngine.UI.Text disp;	//button display
+	public UnityEngine.UI.Text nameDisp;	//button display
+	public UnityEngine.UI.Text infoDisp;
 	public float numOfUpgrades = 0f;	//number of upgrades
 	public float purchasePrice;	//purchase price
 	//public Sprite BG;
@@ -27,16 +28,20 @@ public class BG1 : MonoBehaviour {
 
 	void display(){
 		if (numOfUpgrades == 0f) {	//display initial purchase price for background. numOfUpgrades == 1 for background
-			disp.text = BGName + "\n" + "Buy shoes: " + player.dispValToNiceString(purchasePrice);
+			nameDisp.text = BGName;
+			infoDisp.text = "Buy shoes: " + player.dispValToNiceString(purchasePrice);
 		}
 		else if (numOfUpgrades == 1f) {	//display purchase price for clothes. numOfUpgrades == 2 for clothes
-			disp.text = BGName + "\n" + "Buy clothes: " + player.dispValToNiceString(purchasePrice);
+			nameDisp.text = BGName;
+			infoDisp.text = "Buy clothes: " + player.dispValToNiceString(purchasePrice);
 		}
 		else if (numOfUpgrades == 2f) {	//display purchase price for hats. numOfUpgrades == 3 for hats
-			disp.text = BGName + "\n" + "Buy hats: " + player.dispValToNiceString(purchasePrice);
+			nameDisp.text = BGName;
+			infoDisp.text = "Buy hats: " + player.dispValToNiceString(purchasePrice);
 		}
 		else if (numOfUpgrades > 2f) {	//display reached max purchase, no more purchases available
-			disp.text = BGName + "\n" + "All accessories purchased!";
+			nameDisp.text = BGName;
+			infoDisp.text = "All accessories purchased!";
 		}
 	}
 }
