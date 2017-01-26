@@ -29,11 +29,12 @@ public class TreatTapSprite2 : MonoBehaviour {
 				 	//because otherwise audioSource1 will reference the disabled varibale, aSources, when audioSource1
 					//is called in OnEnable(). This is occurs because aSources is nothing when "gameObject.SetActive(false)" is called
 					//in RefreshGameObj()
-		//AudioSource type array of AudioSource components attached to gameObject
-		aSources = GetComponents <AudioSource>();
-		//**To randomize sounds, could have one AudioSource object that is randomly initialized to
-		//**one of the elements in the AudioSource array, aSources, on every tap.
-		audioSource1 = aSources[Random.Range(0,14)];
+			//AudioSource type array of AudioSource components attached to gameObject
+		//aSources = GetComponents <AudioSource>();
+			//**To randomize sounds, could have one AudioSource object that is randomly initialized to
+			//**one of the elements in the AudioSource array, aSources, on every tap.
+		//audioSource1 = aSources[Random.Range(0,14)];
+		audioSource1 = GetComponent<AudioSource>();
 	}
 
 	void OnEnable(){ //this function is called when an object becomes enabled and active
@@ -81,7 +82,8 @@ public class TreatTapSprite2 : MonoBehaviour {
 			displayTime = resetDisplayTime;	//reset display time
 			initialPos = new Vector2 (Random.Range(-2f, 2f), ceilingVal); //set new random initial position
 			transform.position = initialPos;	//set new random position
-			audioSource1 = aSources[Random.Range(0,4)]; //set new random dog sound
+				//audioSource1 = aSources[Random.Range(0,4)]; //set new random dog sound
+			audioSource1 = GetComponent<AudioSource>();
 			rotateZ = 0f;
 			bone.transform.rotation = Quaternion.Euler (0, 0, rotateZ);	//reset rotation
 			gameObject.SetActive (false);	//deactivate game object for next tap

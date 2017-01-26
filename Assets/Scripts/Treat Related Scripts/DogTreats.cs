@@ -18,6 +18,7 @@ public class DogTreats : MonoBehaviour {
 	public float playerTreatsPerSec = 0f; //total treats per second
 	public bool showNotif = false;	//bool to show toy notification
 	public bool didTap = false;	//tap recorder
+	public bool isMute; //mute button
 	public int bigBoneCounter;
 	int receive;
 	int receive2;
@@ -37,6 +38,11 @@ public class DogTreats : MonoBehaviour {
 
 	void Update(){
 		PlayerInfoDisplay ();
+	}
+
+	public void Mute (){
+		isMute = !isMute;
+		AudioListener.volume =  isMute ? 0 : 1;
 	}
 
 	void PlayerInfoDisplay(){
