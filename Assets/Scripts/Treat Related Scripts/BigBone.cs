@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(AudioSource))]
+//[RequireComponent(typeof(AudioSource))]
 public class BigBone : MonoBehaviour {
 
 	public DogTreats player;
@@ -12,7 +12,7 @@ public class BigBone : MonoBehaviour {
 
 	public float spriteSpeed;	//speed of game object
 	public float ceilingVal;	//height to drop bone from
-
+/* ---------Moved sound related code to DogTreats.cs so user can claim earlier while sound still plays
 	AudioSource[] aSources;
 	AudioSource audioSource1;
 		//wanted it to be public so it can be played in DogTreats.cs so the sound isn't cut off when the bone is claimed
@@ -35,7 +35,7 @@ public class BigBone : MonoBehaviour {
 		audioSource1.Play ();
 		StartCoroutine (AudioFadeOut.FadeOut (audioSource1, audioSource1.clip.length));
 	}
-
+*/
 	// Use this for initialization
 	void Start () {
 		gameObject.SetActive (false);
@@ -49,7 +49,7 @@ public class BigBone : MonoBehaviour {
 			notMoving = true;
 		}
 	}
-
+/* ---------Moved sound related code to DogTreats.cs so user can claim earlier while sound still plays
 	//Audio Fade Out
 	//https://forum.unity3d.com/threads/fade-out-audio-source.335031/
 	public static class AudioFadeOut {
@@ -64,7 +64,7 @@ public class BigBone : MonoBehaviour {
 			audioSource.volume = startVolume;
 		}
 	}
-
+*/
 	void Movement(){
 		transform.Translate (Vector2.down * spriteSpeed * Time.deltaTime);
 	}
@@ -74,7 +74,7 @@ public class BigBone : MonoBehaviour {
 		spawned = false;
 		notMoving = false;
 		player.bigBoneCounter = 0; //reset pity timer if a bigbone is retrieved
-		gameObject.SetActive (false);	//deactivate game object for next tap
+		gameObject.SetActive (false);
 	}
 
 	public void SpawnBigBone(){
@@ -82,7 +82,7 @@ public class BigBone : MonoBehaviour {
 	}
 
 	void OnMouseDown(){
-		if (notMoving && !audioSource1.isPlaying) {
+		if (notMoving/* && !audioSource1.isPlaying*/) {
 			player.totalTreats += player.totalTreats + player.treatsPerTap * 100;
 			Refresh ();
 		}

@@ -116,13 +116,37 @@ public class DogTreats : MonoBehaviour {
 		didTap = true;
 	}
 
+	//Audio Fade Out
+	//https://forum.unity3d.com/threads/fade-out-audio-source.335031/
+	public static class AudioFadeOut {
+		public static IEnumerator FadeOut (AudioSource audioSource, float FadeTime) {
+			float startVolume = audioSource.volume;
+			while (audioSource.volume > 0) {
+				audioSource.volume -= startVolume * Time.deltaTime / FadeTime;
+
+				yield return null;
+			}
+			audioSource.Stop ();
+			audioSource.volume = startVolume;
+		}
+	}
+
+	AudioSource[] aSources;
+	AudioSource audioSource1;
+
 	void RollForBigBone(){
-		receive = Random.Range(0, 20); //1 in 5000 chance to receive a big bone
-		receive2 = Random.Range (0, 20);
-		if (receive == receive2) {
+		receive = Random.Range(0, 5000); //1 in 5000 chance to receive a big bone
+		receive2 = Random.Range (0, 5000);
+		if (receive == receive2 && !bigBone.gameObject.activeSelf) {
 			bigBone.gameObject.SetActive (true);
 			bigBone.SpawnBigBone ();
-		} else if (bigBoneCounter >= 2000) { //receive big bone every 2000 taps
+
+			aSources = GetComponents <AudioSource>();
+
+			audioSource1 = aSources[Random.Range(0,3)];
+			audioSource1.Play ();
+			StartCoroutine (AudioFadeOut.FadeOut (audioSource1, audioSource1.clip.length));
+		} else if (bigBoneCounter >= 2000 && !bigBone.gameObject.activeSelf) { //receive big bone every 2000 taps
 			bigBone.gameObject.SetActive (true);
 			bigBone.SpawnBigBone ();
 		}

@@ -59,7 +59,7 @@ public class DogSprite : MonoBehaviour {
 	}
 
 	void RefreshGameObj(){
-		Vector2 temp = new Vector2 (initialPos.x, Random.Range(initialPos.y - .5f,initialPos.y + 1f));
+		Vector2 temp = new Vector2 (initialPos.x, Random.Range(initialPos.y - .5f,initialPos.y + .5f));
 		transform.position = temp;	//refresh current sprite
 	}
 
