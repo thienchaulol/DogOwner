@@ -23,7 +23,7 @@ public class DogSprite : MonoBehaviour {
 	void Update () {
 		//"numberOfUpgrades" is for upgrading the dog (in Dog1)
 		//"numOfUpgrades" is for upgrading background and clothing (in BG1)
-		if (player.numberOfUpgrades > 0f) {	//display dog sprite when dog is purchased
+		if (player.numberOfUpgrades > 0f) {	//display dog sprite only if purchased
 			if (purchases.numOfUpgrades == 0) {	//no purchases in BG tab, default dog
 				this.gameObject.GetComponent<SpriteRenderer> ().sprite = dog;
 				//first purchase will only change the background
@@ -88,7 +88,7 @@ public class DogSprite : MonoBehaviour {
 
 	//checks for user click. eventually changed to user tap for mobile apps
 	void OnMouseDown(){
-		if (player.numberOfUpgrades > 0) {
+		if (player.numberOfUpgrades > 0 ) {
 			//Debug.Log ("clicked");
 			if (click == false) {
 				initialJumpPos = transform.position;
